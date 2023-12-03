@@ -17,11 +17,16 @@ You will need Python version 3.10.0 or later and pip package installer.[^2]
 
 The package is currently not available on the PyPi.
 Therefore, you can download the tar.gz file from < dist > folder. Then navigate to the file and enter this code in terminal:  
+
 `Python3 pip install ./alchemyrohan-1.0.0.tar.gz`
 
-How to use it in your code:
+How to import in your code:
 
-`import alchemyrohan` or `import alchemyrohan as ar`
+`import alchemyrohan` 
+
+or 
+
+`import alchemyrohan as ar`
 
 
 # How to use it
@@ -41,29 +46,24 @@ There are few main functions which you need to use:
 
 The example code below is simple 
 
-`
+```
 import os
 from sqlalchemy import create_engine
-
-import sys
-sys.path.append(
-    os.path.join(
-    os.path.dirname(os.path.dirname(__file__)),
-    )
-)
 
 from alchemyrohan.assemble import assemble_model
 from alchemyrohan.utils import is_model
 from alchemyrohan.utils import get_model
+from alchemyrohan.utils import reload_module
+
+import tests.test_model
 
 dir = os.path.dirname(__file__)
-
 conn = f"sqlite:///{dir}{os.sep}test_sqlite{os.sep}test.db"
-table_name = 'child'
-abs_os_path_to_model = f"{dir}\\test_model"
-py_path_to_model = 'tests.test_model'
 
 engine = create_engine(conn)
+table_name = 'child' # all names will be capitilized
+abs_os_path_to_model = os.path.join(dir, 'test_model') # path
+py_path_to_model = 'tests.test_model' # pythonic path
 
 try:
     assemble_model(
@@ -76,6 +76,8 @@ except Exception as e:
     print(e)
     exit(1)
 
+reload_module(tests.test_model) # compile the new code
+
 if is_model(table_name, abs_os_path_to_model):
     model = get_model(table_name, py_path_to_model)
     print(f'SqlAlchemy model exist: {model}')
@@ -84,6 +86,6 @@ if is_model(table_name, abs_os_path_to_model):
 
 print(f'Something unexpected went wrong')
 exit(-1)
-`
+```
 
 
