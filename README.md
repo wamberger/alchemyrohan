@@ -29,15 +29,18 @@ or
 `import alchemyrohan as ar`
 
 
-# How to use it
+# How to use
 
-There are few main functions which you need to use:
+## Main functions
 
 - **assemble_model()** is the main function. This function is used to create a SqlAlchemy database model and accepts next arguments:
-    * *engine* this is SqlAlchemy engine `from sqlalchemy import create_engine`
-    * *table_name* this is the name of the database table
-    * *abs_os_path_to_model* absolute path to the model's folder
-    * *py_path_to_model* pythonic path to the models
+    * <*engine*> this is SqlAlchemy engine  
+
+    `from sqlalchemy import create_engine`
+
+    * <*table_name*> this is the name of the database table
+    * <*abs_os_path_to_model*> absolute path to the model's folder
+    * <*py_path_to_model*> pythonic path to the models
 
 - **reload_module()** when the code and file are getting created, the python need again to compile the new code. Thus you need to call the reload function. You will need to add pythonic path/import: 
 ```
@@ -47,15 +50,24 @@ import tests.test_model
 
 reload_module(tests.test_model)
 ```
+- **is_model()** this function is used to check if the model was created. You need to pass the <*table_name*> and <*abs_os_path_to_model*> arguments.
 
-- **is_model()** this function is used to check if the model was created. You need to pass the *table_name* and *abs_os_path_to_model* arguments.
+- **get_model()** you retrieve the wanted database object of SqlAlchemy model. It needs the <*table_name*> and <*py_path_to_model*> arguments.
 
-- **get_model()** you retrieve the wanted database object of SqlAlchemy model. It needs the *table_name* and *py_path_to_model* arguments.
+- **is_module()** this is optional function if you want to check the pythonic path. It needs <*py_path_to_model*> argument.
 
-- **is_module()** this is optional function if you want to check the pythonic path. It needs *py_path_to_model* argument.
+## Models
+
+Created SqlAlchemy models can be used as 'normal' SqlAlchemy models, but they have some additional features:
+- default values
+- parent-child relationships
+- <*_post_init_*> method is used as validation
+- when 'printing' the string will contain the model/object name, attributes names with their values.
+
+All models are named with the same naming convention as they are in the database with one difference, they are capitalized (python class naming convention).
 
 
-# Database Support and Testing
+## Database Support and Testing
 
 It was tested and supports SqLite and Oracle Database.
 
