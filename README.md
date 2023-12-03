@@ -71,6 +71,7 @@ All models are named with the same naming convention as they are in the database
 
 It was tested and supports SqLite and Oracle Database.
 
+In the **tests** directory you have the testing code.
 
 # Examples
 
@@ -173,3 +174,15 @@ class Child(Base):
 			f'name={self.name},'\
 			f'grade={self.grade})'
 ```
+
+
+# IMPORTANT!
+
+In some cases you will need to correct the code manually. 
+This can be the case when:
+
+- your are creating only one model which has relationship to other tables, thus you will need to create also those models or delete the part of the code.
+
+- your tables have no primary keys. SqlAlchemy needs one primary key.
+
+- your database has some datatypes or features which were not testet.
