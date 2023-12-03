@@ -33,19 +33,36 @@ or
 
 There are few main functions which you need to use:
 
-- < assemble_model > is the main function. This function is used to create a SqlAlchemy database model.
+- **assemble_model()** is the main function. This function is used to create a SqlAlchemy database model and accepts next arguments:
+    * *engine* this is SqlAlchemy engine `from sqlalchemy import create_engine`
+    * *table_name* this is the name of the database table
+    * *abs_os_path_to_model* absolute path to the model's folder
+    * *py_path_to_model* pythonic path to the models
 
-- < reload_module > when the code and file are getting created, the python need again to compile the new code. Thus you need to call the reload function.
+- **reload_module()** when the code and file are getting created, the python need again to compile the new code. Thus you need to call the reload function. You will need to add pythonic path/import: 
+```
+import tests.test_model
 
-- < is_model > this function is used to check if the model was created. 
+...some code...
 
-- < get_model > you retrieve the wanted database object of SqlAlchemy model.
+reload_module(tests.test_model)
+```
+
+- **is_model()** this function is used to check if the model was created. You need to pass the *table_name* and *abs_os_path_to_model* arguments.
+
+- **get_model()** you retrieve the wanted database object of SqlAlchemy model. It needs the *table_name* and *py_path_to_model* arguments.
+
+- **is_module()** this is optional function if you want to check the pythonic path. It needs *py_path_to_model* argument.
 
 
-# Example
+# Database Support and Testing
 
-The example code below is simple 
+It was tested and supports SqLite and Oracle Database.
 
+
+# Examples
+
+**Simple example**:
 ```
 import os
 from sqlalchemy import create_engine
@@ -88,4 +105,59 @@ print(f'Something unexpected went wrong')
 exit(-1)
 ```
 
+**Example of a model**:
+```
 
+from sqlalchemy import Column
+from tests.test_model import Base
+from sqlalchemy.dialects.sqlite import INTEGER
+from sqlalchemy.dialects.sqlite import TEXT
+from sqlalchemy.orm import relationship
+
+
+class Child(Base):
+    __tablename__ = 'child'
+
+
+    id = Column(INTEGER, primary_key=True)
+    parent_id = Column(INTEGER, nullable=True, default=None)
+    name = Column(TEXT, nullable=True, default=None)
+    grade = Column(INTEGER, nullable=True, default=None)
+
+
+    parent_Parent = relationship("Parent", back_populates="children_Child", lazy="joined")
+
+    def __post_init__(self):
+
+        if not isinstance(self.id, int):
+            try:
+                self.id = int(self.id)
+            except:
+                raise SyntaxError(f'< {self.id} > is not integer')
+        
+        if not isinstance(self.parent_id, int):
+            try:
+                self.parent_id = int(self.parent_id)
+            except:
+                raise SyntaxError(f'< {self.parent_id} > is not integer')
+        
+        if not isinstance(self.name, str):
+            try:
+                self.name = str(self.name)
+            except:
+                raise SyntaxError(f'< {self.name} > is not string')
+        
+        if not isinstance(self.grade, int):
+            try:
+                self.grade = int(self.grade)
+            except:
+                raise SyntaxError(f'< {self.grade} > is not integer')
+        
+    
+    def __str__(self):
+
+        return f'User(id={self.id},'\
+			f'parent_id={self.parent_id},'\
+			f'name={self.name},'\
+			f'grade={self.grade})'
+```
