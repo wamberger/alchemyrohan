@@ -16,13 +16,13 @@ def parse_requirements(filename):
 setup(
     name="alchemyrohan",
     version="1.0.0",
-    author="Alan Wamberger",
-    author_email="alanwamberger@protonmail.com",
-    description="Package to auto-create SqlAlchemy model in Python code itself",
-    long_description=long_descr,
-    url="https://wamberger.eu",
     packages=find_packages(),
     install_requires=parse_requirements('requirements.txt'),
+    author="Alan Wamberger",
+    author_email="alanwamberger@protonmail.com",
+    description="An extension for SqlAlchemy where database models are created automatically",
+    long_description=long_desc,
+    url="https://github.com/Wamberger/alchemyrohan",
     python_requires='>=3.10.0',
     classifiers=[
         "Development Status :: 4 - Beta",
