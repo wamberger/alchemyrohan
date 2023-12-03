@@ -31,14 +31,13 @@ or
 
 # How to use
 
-## Main functions
+## Functions
 
 - **assemble_model()** 
 is the main function. This function is used to create a SqlAlchemy database model and accepts next arguments:
     | argument | description |
     | --------- | --------- |
-    | *engine* | this is SqlAlchemy engine  
-    `from sqlalchemy import create_engine` |
+    | *engine* | this is SqlAlchemy engine  `from sqlalchemy import create_engine` |
     | *table_name* | this is the name of the database table |
     | *abs_os_path_to_model* | absolute path to the model's folder |
     | *py_path_to_model* | pythonic path to the models |
