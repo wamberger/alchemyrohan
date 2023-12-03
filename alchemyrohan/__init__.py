@@ -2,11 +2,11 @@
 
 """
 
-AlchemyRohan is package where...
+Alchemyrohan is an extension package for SqlAlchemy
+where the python code of the database models is 
+created automatically according to the database schema.
 
-
-
-Starting point is < assemble_model > function.
+More in < README.md > file
 
 """
 
