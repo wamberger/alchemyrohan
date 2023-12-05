@@ -274,7 +274,7 @@ def _columns(
         tmp = ''.join([tmp, _get_type_prop(c['type'])])
 
         imp = f"from sqlalchemy.dialects.oracle import"\
-            f"{_get_type_name(c['type'])}"
+            f" {_get_type_name(c['type'])}"
         if imp not in _dialect_imports:
             _dialect_imports.append(imp)
 
