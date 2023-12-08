@@ -4,10 +4,6 @@
     Alchemyrohan
 </h1>
 
-<div align="center">
-![Python 3.10](https://img.shields.io/badge/python-3.10-yellow) ![Python 3.11](https://img.shields.io/badge/python-3.11-blue)
-</div>
-
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.10-yellow" alt="Python 3.10">
   <img src="https://img.shields.io/badge/python-3.11-blue" alt="Python 3.11">
