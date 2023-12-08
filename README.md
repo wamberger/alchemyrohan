@@ -8,6 +8,12 @@
 ![Python 3.10](https://img.shields.io/badge/python-3.10-yellow) ![Python 3.11](https://img.shields.io/badge/python-3.11-blue)
 </div>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/python-3.10-yellow" alt="Python 3.10">
+  <img src="https://img.shields.io/badge/python-3.11-blue" alt="Python 3.11">
+</p>
+
+
 Alchemyrohan is an extension package for SqlAlchemy[^1] where the python code of the database models is created automatically according to the database schema.
 [^1]: [sqlalchemy](https://www.sqlalchemy.org/)
 
