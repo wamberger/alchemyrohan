@@ -2,11 +2,13 @@
 
 # Alchemyrohan 
 
+![Python 3.10](https://img.shields.io/badge/python-3.10-yellow) ![Python 3.11](https://img.shields.io/badge/python-3.11-blue)
+
 Alchemyrohan is an extension package for SqlAlchemy[^1] where the python code of the database models is created automatically according to the database schema.
 [^1]: [sqlalchemy](https://www.sqlalchemy.org/)
 
 
-# How to Install
+## How to Install
 
 ### Requirements
 
@@ -29,9 +31,9 @@ or
 `import alchemyrohan as ar`
 
 
-# How to use
+## How to use
 
-## Functions
+### Functions
 
 - **assemble_model()** 
 is the main function. This function is used to create a SqlAlchemy database model and accepts next arguments:
@@ -73,7 +75,7 @@ It was tested and supports SqLite and Oracle Database.
 
 In the **tests** directory you have the testing code.
 
-# Examples
+## Examples
 
 **Simple example**:
 ```
@@ -176,7 +178,7 @@ class Child(Base):
 ```
 
 
-# IMPORTANT!
+## IMPORTANT!
 
 In some cases you will need to correct the code manually. 
 This can be the case when:
