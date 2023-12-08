@@ -1,6 +1,9 @@
 
 
-# Alchemyrohan 
+<h1 align="center">
+    Alchemyrohan
+</h1>
+
 
 ![Python 3.10](https://img.shields.io/badge/python-3.10-yellow) ![Python 3.11](https://img.shields.io/badge/python-3.11-blue)
 
