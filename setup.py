@@ -15,7 +15,7 @@ def parse_requirements(filename):
 
 setup(
     name="alchemyrohan",
-    version="0.9.0",
+    version="0.3.0",
     packages=find_packages(),
     install_requires=parse_requirements('requirements.txt'),
     author="Alan Wamberger",
