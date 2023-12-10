@@ -38,7 +38,7 @@ or
 
 ### Functions
 
-- **assemble_model()** is the main function. This function is used to create a SqlAlchemy database model and accepts next arguments:
+- **assemble_model()** is the main function. This function is used to create a SqlAlchemy database model and is accepting the following arguments:
     | argument | description |
     | --------- | --------- |
     | *engine* | this is SqlAlchemy engine  `from sqlalchemy import create_engine` |
@@ -46,9 +46,9 @@ or
     | *abs_os_path_to_model* | absolute path to the model's folder |
     | *py_path_to_model* | pythonic path to the models |
 
-- **reload_module()** when the code and file are getting created, the python need again to compile the new code. Thus you need to call the reload function. You will need to add pythonic path/import:
+- **reload_module()** when the code and file are created, the new code needs to be compiled - if the function <*assemble_model*> is called inside a program which will use the new created models. Thus you need to call the *reload* function. You will need to add pythonic path/import:
 
-~~~
+~~~python
 import tests.test_model
 
 ...some code...
@@ -58,13 +58,14 @@ reload_module(tests.test_model)
 
 - **is_model()** this function is used to check if the model was created. You need to pass the <*table_name*> and <*abs_os_path_to_model*> arguments.
 
-- **get_model()** you retrieve the wanted database object of SqlAlchemy model. It needs the <*table_name*> and <*py_path_to_model*> arguments.
+- **get_model()** you will retrieve the wanted database object of the SqlAlchemy model. It needs the <*table_name*> and <*py_path_to_model*> arguments.
 
 - **is_module()** this is optional function if you want to check the pythonic path. It needs <*py_path_to_model*> argument.
 
 ### Models
 
-Created SqlAlchemy models can be used as 'normal' SqlAlchemy models, but they have some additional features:
+Created SqlAlchemy models have some additional features:
+
 - default values
 - parent-child relationships
 - <*_post_init_*> method is used as validation
@@ -77,9 +78,9 @@ All models are named with the same naming convention as they are in the database
 
 Currently supports SqLite and Oracle Database.
 
-* ***v0.1.0***: writing code and tested with SqLite database  
-* ***v0.2.0***: tested with Oracle database
-* ***v0.3.0***: added additional functions and bug fixing.
+* ***v0.1.0*** - writing code and tested with SqLite database  
+* ***v0.2.0*** - tested with Oracle database
+* ***v0.3.1*** - added additional functions and bug/text fixing.
 
 
 ## 📝 Examples
@@ -188,10 +189,10 @@ class Child(Base):
 
 ~~~ 
 
-## ❗ IMPORTANT - Possible Errors!
+## ❗ IMPORTANT
 
 In some cases you will need to correct the code manually. 
-This can be the case when:
+This will be in case when:
 
 - your are creating only one model which has relationship to other tables, thus you will need to create also those models or delete the part of the code.
 
