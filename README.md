@@ -78,7 +78,7 @@ Created SqlAlchemy models can be used as 'normal' SqlAlchemy models, but they ha
 All models are named with the same naming convention as they are in the database with one difference, they are capitalized (python class naming convention).
 
 
-## Development and Support
+## 📋 Development and Support
 
 Currently supports SqLite and Oracle Database.
 
@@ -200,3 +200,9 @@ This can be the case when:
 - your tables have no primary keys. SqlAlchemy needs one primary key.
 
 - your database has some datatypes or features which were not yet been testet.
+
+## 📄 License
+
+Alchemyrohan is MIT licensed, as found in the [LICENSE][1] file.
+
+[1]: https://github.com/Wamberger/alchemyrohan/blob/master/LICENSE
