@@ -205,4 +205,4 @@ This can be the case when:
 
 Alchemyrohan is MIT licensed, as found in the [LICENSE][1] file.
 
-[1]: https://github.com/Wamberger/alchemyrohan/blob/master/LICENSE
+[1]: https://github.com/wamberger/alchemyrohan/blob/master/LICENSE
