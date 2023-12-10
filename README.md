@@ -16,7 +16,8 @@ With pip package installer from **[PyPI](https://pypi.org/project/pip/)** direct
 pip install alchemyrohan
 ```
 
-of from source:
+or from source:
+
 ```
 git clone --recursive https://github.com/wamberger/alchemyrohan.git
 cd alchemyrohan

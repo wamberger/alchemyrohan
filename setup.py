@@ -15,11 +15,11 @@ def parse_requirements(filename):
 
 setup(
     name="alchemyrohan",
-    version="0.3.1",
+    version="0.2.9",
     packages=find_packages(),
     install_requires=parse_requirements('requirements.txt'),
     author="Alan Wamberger",
-    author_email="alanwamberger@protonmail.com",
+    author_email="awamberger@proton.me",
     description="An extension package for SqlAlchemy which automatically creates the database models",
     long_description=long_desc,
     long_description_content_type='text/markdown',
