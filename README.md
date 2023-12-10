@@ -8,11 +8,11 @@
 <img src="https://img.shields.io/badge/build-passing-green" alt="build">
   <img src="https://img.shields.io/badge/pypi-v22.0.3-yellow" alt="pypi">
   <img src="https://img.shields.io/badge/python-3.9_|_3.10_|_3.11-blue" alt="Python">
-  <img src="https://img.shields.io/badge/SqlAclhemy-2.0-red" alt="SqlAlchemy">
+  <img src="https://img.shields.io/badge/SqlAlchemy-2.0-red" alt="SqlAlchemy">
 </p>
 
 
-Alchemyrohan is an extension package for SqlAlchemy[^1] where the database models are created automatically according to the database schema.
+Alchemyrohan is an extension package for SqlAlchemy[^1] which automatically creates the database models according to the database schema.
 [^1]: [sqlalchemy](https://www.sqlalchemy.org/)
 
 
@@ -73,16 +73,19 @@ Created SqlAlchemy models can be used as 'normal' SqlAlchemy models, but they ha
 - default values
 - parent-child relationships
 - <*_post_init_*> method is used as validation
-- when 'printing' the string will contain the model/object name, attributes names with their values.
+- when 'printing' the string will contain the model/object name and attributes names with their values.
 
 All models are named with the same naming convention as they are in the database with one difference, they are capitalized (python class naming convention).
 
 
-## Database Support and Testing
+## Development and Support
 
-It was tested and supports SqLite and Oracle Database.
+Currently supports SqLite and Oracle Database.
 
-In the **tests** directory you have the testing code.
+* ***v0.1.0:***: writing code and tested with SqLite database  
+* ***v0.2.0:***: tested with Oracle database
+* ***v0.3.0:***: added additional functions and bug fixing.
+
 
 ## Examples
 
@@ -187,7 +190,7 @@ class Child(Base):
 ```
 
 
-## IMPORTANT!
+## IMPORTANT - Possible Errors!
 
 In some cases you will need to correct the code manually. 
 This can be the case when:
@@ -196,4 +199,4 @@ This can be the case when:
 
 - your tables have no primary keys. SqlAlchemy needs one primary key.
 
-- your database has some datatypes or features which were not testet.
+- your database has some datatypes or features which were not yet been testet.
