@@ -6,14 +6,14 @@
 ![build passing](https://img.shields.io/badge/build-passing-green) ![pypi v22.0.3](https://img.shields.io/badge/pypi-v22.0.3-yellow) ![Python 3.9 | 3.10 | 3.11](https://img.shields.io/badge/python-3.9_|_3.10_|_3.11-blue) ![SqlAlchemy](https://img.shields.io/badge/SqlAlchemy-2.0-red)
 
 
-Alchemyrohan is an extension package for SqlAlchemy[^1] which automatically creates the database models according to the database schema.
-[^1]: [sqlalchemy](https://www.sqlalchemy.org/)
+Alchemyrohan is an extension package for [SqlAlchemy][1] which automatically creates the database models according to the database schema.
+[1]: https://www.sqlalchemy.org/
 
 
 ## 🔧 How to Install
 
-With pip package installer from PyPI[^2] directly:
-[^2]: [pip](https://pypi.org/project/pip/)
+With pip package installer from [PyPI][2] directly:
+[2]: [pip](https://pypi.org/project/pip/)
 
 ```
 pip install alchemyrohan
@@ -202,6 +202,6 @@ This will be in case when:
 
 ## 📄 License
 
-Alchemyrohan is MIT licensed, as found in the [LICENSE][1] file.
+Alchemyrohan is MIT licensed, as found in the [LICENSE][3] file.
 
-[1]: https://github.com/wamberger/alchemyrohan/blob/master/LICENSE
+[3]: https://github.com/wamberger/alchemyrohan/blob/master/LICENSE
