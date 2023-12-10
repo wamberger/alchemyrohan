@@ -32,7 +32,7 @@ cd alchemyrohan
 python3 setup.py install
 ```
 
-## How to use
+## ✏️ How to use
 
 Import in your code:
 
@@ -67,7 +67,7 @@ reload_module(tests.test_model)
 
 - **is_module()** this is optional function if you want to check the pythonic path. It needs <*py_path_to_model*> argument.
 
-## Models
+### Models
 
 Created SqlAlchemy models can be used as 'normal' SqlAlchemy models, but they have some additional features:
 - default values
@@ -87,7 +87,7 @@ Currently supports SqLite and Oracle Database.
 * ***v0.3.0***: added additional functions and bug fixing.
 
 
-## Examples
+## 📝 Examples
 
 **Simple example**:
 ```
@@ -190,7 +190,7 @@ class Child(Base):
 ```
 
 
-## IMPORTANT - Possible Errors!
+## ❗ IMPORTANT - Possible Errors!
 
 In some cases you will need to correct the code manually. 
 This can be the case when:
