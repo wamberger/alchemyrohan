@@ -27,7 +27,7 @@ pip install alchemyrohan
 
 of from source:
 ```
-git clone --recursive https://github.com/Wamberger/alchemyrohan.git
+git clone --recursive https://github.com/wamberger/alchemyrohan.git
 cd alchemyrohan
 python3 setup.py install
 ```
