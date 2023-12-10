@@ -22,6 +22,7 @@ setup(
     author_email="alanwamberger@protonmail.com",
     description="An extension package for SqlAlchemy which automatically creates the database models",
     long_description=long_desc,
+    long_description_content_type='text/markdown',
     url="https://github.com/wamberger/alchemyrohan",
     python_requires='>=3.10.0',
     classifiers=[
