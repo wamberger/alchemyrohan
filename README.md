@@ -204,7 +204,8 @@ Alchemyrohan is MIT licensed, as found in the [LICENSE][1] file.
 
 This project uses the following third-party code and license:
 * SqlAlchemy (MIT License)
-* python-oracledb (Apache License 2.0)
+* python-oracledb (Apache License 2.0) 
+
 Licenses: [THIRD_PARTY_LICENSES][2]
 
 
