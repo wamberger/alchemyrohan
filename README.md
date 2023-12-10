@@ -82,9 +82,9 @@ All models are named with the same naming convention as they are in the database
 
 Currently supports SqLite and Oracle Database.
 
-* ***v0.1.0:***: writing code and tested with SqLite database  
-* ***v0.2.0:***: tested with Oracle database
-* ***v0.3.0:***: added additional functions and bug fixing.
+* ***v0.1.0***: writing code and tested with SqLite database  
+* ***v0.2.0***: tested with Oracle database
+* ***v0.3.0***: added additional functions and bug fixing.
 
 
 ## Examples
