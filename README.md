@@ -202,4 +202,9 @@ This will be in case when:
 
 Alchemyrohan is MIT licensed, as found in the [LICENSE][1] file.
 
+This project uses the following third-party code:
+- SqlAlchemy (MIT License)
+- python-oracledb (Apache License 2.0)
+
+
 [1]: https://github.com/wamberger/alchemyrohan/blob/master/LICENSE
