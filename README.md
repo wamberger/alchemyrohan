@@ -48,13 +48,13 @@ or
 
 - **reload_module()** when the code and file are created, the new code needs to be compiled - if the function <*assemble_model*> is called inside a program which will use the new created models. Thus you need to call the *reload* function. You will need to add pythonic path/import:
 
-~~~python
-import tests.test_model
+    ~~~python
+    import tests.test_model
 
-...some code...
+    ...some code...
 
-reload_module(tests.test_model)
-~~~
+    reload_module(tests.test_model)
+    ~~~
 
 - **is_model()** this function is used to check if the model was created. You need to pass the <*table_name*> and <*abs_os_path_to_model*> arguments.
 
