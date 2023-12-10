@@ -189,7 +189,7 @@ class Child(Base):
 
 ~~~ 
 
-## ❗ IMPORTANT
+## ❗IMPORTANT
 
 In some cases you will need to correct the code manually. 
 This will be in case when:
