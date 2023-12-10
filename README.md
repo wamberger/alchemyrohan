@@ -8,6 +8,7 @@
 <img src="https://img.shields.io/badge/build-passing-green" alt="build">
   <img src="https://img.shields.io/badge/pypi-v22.0.3-yellow" alt="pypi">
   <img src="https://img.shields.io/badge/python-3.9_|_3.10_|_3.11-blue" alt="Python">
+  <img src="https://img.shields.io/badge/SqlAclhemy-2.0-red" alt="SqlAlchemy">
 </p>
 
 
