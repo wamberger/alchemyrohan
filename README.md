@@ -16,7 +16,7 @@ Alchemyrohan is an extension package for SqlAlchemy[^1] which automatically crea
 [^1]: [sqlalchemy](https://www.sqlalchemy.org/)
 
 
-## How to Install
+## 🔧 How to Install
 
 With pip package installer from PyPI[^2] directly:
 [^2]: [pip](https://pypi.org/project/pip/)
