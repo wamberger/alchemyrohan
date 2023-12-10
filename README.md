@@ -78,7 +78,7 @@ Created SqlAlchemy models can be used as 'normal' SqlAlchemy models, but they ha
 All models are named with the same naming convention as they are in the database with one difference, they are capitalized (python class naming convention).
 
 
-## 📋 Development and Support
+## 📋 Development and DB-Support
 
 Currently supports SqLite and Oracle Database.
 
