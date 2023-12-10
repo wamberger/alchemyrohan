@@ -1,8 +1,9 @@
 
 
+
 # Alchemyrohan
 
-  ![build passing](https://img.shields.io/badge/build-passing-green) ![pypi v22.0.3](https://img.shields.io/badge/pypi-v22.0.3-yellow) ![Python 3.9 | 3.10 | 3.11](https://img.shields.io/badge/python-3.9_|_3.10_|_3.11-blue) ![SqlAlchemy](https://img.shields.io/badge/SqlAlchemy-2.0-red)
+![build passing](https://img.shields.io/badge/build-passing-green) ![pypi v22.0.3](https://img.shields.io/badge/pypi-v22.0.3-yellow) ![Python 3.9 | 3.10 | 3.11](https://img.shields.io/badge/python-3.9_|_3.10_|_3.11-blue) ![SqlAlchemy](https://img.shields.io/badge/SqlAlchemy-2.0-red)
 
 
 Alchemyrohan is an extension package for SqlAlchemy[^1] which automatically creates the database models according to the database schema.
@@ -37,8 +38,7 @@ or
 
 ### Functions
 
-- **assemble_model()** 
-is the main function. This function is used to create a SqlAlchemy database model and accepts next arguments:
+- **assemble_model()** is the main function. This function is used to create a SqlAlchemy database model and accepts next arguments:
     | argument | description |
     | --------- | --------- |
     | *engine* | this is SqlAlchemy engine  `from sqlalchemy import create_engine` |
@@ -46,14 +46,16 @@ is the main function. This function is used to create a SqlAlchemy database mode
     | *abs_os_path_to_model* | absolute path to the model's folder |
     | *py_path_to_model* | pythonic path to the models |
 
-- **reload_module()** when the code and file are getting created, the python need again to compile the new code. Thus you need to call the reload function. You will need to add pythonic path/import: 
-```
+- **reload_module()** when the code and file are getting created, the python need again to compile the new code. Thus you need to call the reload function. You will need to add pythonic path/import:
+
+`` 
 import tests.test_model
 
 ...some code...
 
 reload_module(tests.test_model)
-```
+``
+
 - **is_model()** this function is used to check if the model was created. You need to pass the <*table_name*> and <*abs_os_path_to_model*> arguments.
 
 - **get_model()** you retrieve the wanted database object of SqlAlchemy model. It needs the <*table_name*> and <*py_path_to_model*> arguments.
@@ -82,8 +84,8 @@ Currently supports SqLite and Oracle Database.
 
 ## 📝 Examples
 
-**Simple example**:
-```
+**Simple example**: 
+``
 import os
 from sqlalchemy import create_engine
 
@@ -123,10 +125,10 @@ if is_model(table_name, abs_os_path_to_model):
 
 print(f'Something unexpected went wrong')
 exit(-1)
-```
+``
 
 **Example of a model**:
-```
+``
 
 from sqlalchemy import Column
 from tests.test_model import Base
@@ -180,8 +182,8 @@ class Child(Base):
 			f'parent_id={self.parent_id},'\
 			f'name={self.name},'\
 			f'grade={self.grade})'
-```
 
+``
 
 ## ❗ IMPORTANT - Possible Errors!
 

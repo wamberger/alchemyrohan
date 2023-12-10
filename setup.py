@@ -20,9 +20,9 @@ setup(
     install_requires=parse_requirements('requirements.txt'),
     author="Alan Wamberger",
     author_email="alanwamberger@protonmail.com",
-    description="An extension for SqlAlchemy where database models are created automatically",
+    description="An extension package for SqlAlchemy which automatically creates the database models",
     long_description=long_desc,
-    url="https://github.com/Wamberger/alchemyrohan",
+    url="https://github.com/wamberger/alchemyrohan",
     python_requires='>=3.10.0',
     classifiers=[
         "Development Status :: 4 - Beta",
