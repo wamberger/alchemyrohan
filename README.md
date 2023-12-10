@@ -84,8 +84,9 @@ Currently supports SqLite and Oracle Database.
 
 ## 📝 Examples
 
-**Simple example**: 
-```
+**Simple example**:
+
+~~~python
 import os
 from sqlalchemy import create_engine
 
@@ -126,10 +127,11 @@ if is_model(table_name, abs_os_path_to_model):
 print(f'Something unexpected went wrong')
 exit(-1)
 
-```
+~~~
 
 **Example of a model**:
-```
+
+~~~python
 
 from sqlalchemy import Column
 from tests.test_model import Base
@@ -183,7 +185,7 @@ class Child(Base):
 			f'parent_id={self.parent_id},'\
 			f'name={self.name},'\
 			f'grade={self.grade})'
-```
+~~~ 
 
 ## ❗ IMPORTANT - Possible Errors!
 
