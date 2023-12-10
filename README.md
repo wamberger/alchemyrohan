@@ -48,13 +48,13 @@ or
 
 - **reload_module()** when the code and file are getting created, the python need again to compile the new code. Thus you need to call the reload function. You will need to add pythonic path/import:
 
-`` 
+~~~
 import tests.test_model
 
 ...some code...
 
 reload_module(tests.test_model)
-``
+~~~
 
 - **is_model()** this function is used to check if the model was created. You need to pass the <*table_name*> and <*abs_os_path_to_model*> arguments.
 
@@ -185,6 +185,7 @@ class Child(Base):
 			f'parent_id={self.parent_id},'\
 			f'name={self.name},'\
 			f'grade={self.grade})'
+
 ~~~ 
 
 ## ❗ IMPORTANT - Possible Errors!
