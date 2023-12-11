@@ -72,6 +72,12 @@ Created SqlAlchemy models have some additional features:
 All models are named with the same naming convention as they are in the database with one difference, they are capitalized (python class naming convention).
 
 
+## 📚 Dependencies
+
+- **sqlalchemy** (version 2.0.x) is an ORM and provides code for its models,
+- **oracledb** (version 1.4.x) is used to shape a database table model with oracle table schema.
+
+
 ## 📋 Development and DB-Support
 
 Currently supports SqLite and Oracle Database.
@@ -198,16 +204,16 @@ This will be in case when:
 
 - your database has some datatypes or features which were not yet been testet.
 
-## 📄 License
+## 📄 License and Third-Party Licenses
 
 Alchemyrohan is MIT licensed, as found in the [LICENSE][1] file.
 
-This project uses the following third-party code and license:
+The following software components are included in this project:
+
 * SqlAlchemy (MIT License)
 * python-oracledb (Apache License 2.0) 
 
-Licenses: [THIRD_PARTY_LICENSES][2]
-
+[THIRD_PARTY_LICENSES][2]
 
 
 [1]: https://github.com/wamberger/alchemyrohan/blob/master/LICENSE
