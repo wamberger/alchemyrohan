@@ -10,16 +10,16 @@ Alchemyrohan is an extension package for **[SqlAlchemy](https://www.sqlalchemy.o
 
 ---
 
-## Contents
+## Content
 
-- [How-to-Install](#How-to-Install)
-- [Database-Support](#Database-Support)
-- [How-to-use](#How-to-use)
+- [How to Install](#How-to-Install)
+- [Database Support](#Database-Support)
+- [How to use](#How-to-use)
   - [Functions](#Functions)
   - [Models](#Models)
 - [Examples](#Examples)
-  - [Simple-Example](#Simple-example)
-  - [Model-Example](#Example-of-one-created-model)
+  - [Simple Example](#Simple-example)
+  - [Model Example](#Example-of-one-created-model)
 - [Dependencies](#Dependencies)
 - [License](#License-and-Third-Party-Licenses)
 
