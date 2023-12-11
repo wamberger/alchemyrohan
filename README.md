@@ -14,12 +14,10 @@ Alchemyrohan is an extension package for **[SqlAlchemy](https://www.sqlalchemy.o
 
 - [How to Install](#-How-to-Install)
 - [Database Support](#-Database-Support)
-- [How to use](#-How-to-use)
-  - [Functions](#-Functions)
+- [How to use](#How-to-use)
+  - [Functions](#Functions)
   - [Models](#-Models)
-- [Examples](#-Examples)
-  - [Simple Example](#Simple-example)
-  - [Model Example](#Example-of-one-created-model)
+- [Example](#-Example)
 - [Dependencies](#-Dependencies)
 - [Important Note](#Important-Note)
 - [Release Notes](#-Release-Notes)
@@ -100,9 +98,9 @@ Created SqlAlchemy models have some additional features:
 All models are named with the same naming convention as they are in the database with one difference, they are capitalized (python class naming convention).
 
 
-## 📝 Examples
+## 📝 Example
 
-**Simple example**:
+**Simple example how to use the code:**
 
 ~~~python
 import os
