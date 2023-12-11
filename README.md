@@ -13,7 +13,7 @@ Alchemyrohan is an extension package for **[SqlAlchemy](https://www.sqlalchemy.o
 ## 📖 Content
 
 - [How to Install](#How-to-Install)
-- [Database Support](#🗄Database-Support)
+- [Database Support](#Database-Support)
 - [How to use](#How-to-use)
   - [Functions](#Functions)
   - [Models](#Models)
@@ -21,8 +21,8 @@ Alchemyrohan is an extension package for **[SqlAlchemy](https://www.sqlalchemy.o
   - [Simple Example](#Simple-example)
   - [Model Example](#Example-of-one-created-model)
 - [Dependencies](#Dependencies)
-- [Release Notes](#Release-Notes)
 - [Important Note](#Important-Note)
+- [Release Notes](#Release-Notes)
 - [License](#License-and-Third-Party-Licenses)
 
 
@@ -44,7 +44,7 @@ python3 setup.py install
 ```
 
 
-## 🗄 Database Support
+## Database Support 🗄
 
 This project is currently designed to work with the following databases:
 
