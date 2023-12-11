@@ -8,6 +8,22 @@
 
 Alchemyrohan is an extension package for **[SqlAlchemy](https://www.sqlalchemy.org/)** which automatically creates the database models according to the database schema.
 
+---
+
+## Contents
+
+- [How-to-Install](#How-to-Install)
+- [Database-Support](#Database-Support)
+- [How-to-use](#How-to-use)
+  - [Functions](#Functions)
+  - [Models](#Models)
+- [Examples](#Examples)
+  - [Simple-Example](#Simple-example)
+  - [Model-Example](#Example-of-one-created-model)
+- [Dependencies](#Dependencies)
+- [License](#License-and-Third-Party-Licenses)
+
+
 
 ## 🔧 How to Install
 
@@ -32,12 +48,6 @@ This project is currently designed to work with the following databases:
 
 - **SqLite**
 - **Oracle**
-
-
-## 📚 Dependencies
-
-- **sqlalchemy** (version 2.0.x) is an ORM and provides code for its models,
-- **oracledb** (version 1.4.x) is used to shape a database table model with an oracle table schema.
 
 
 ## ✏️ How to use
@@ -195,7 +205,13 @@ class Child(Base):
 ~~~ 
 
 
-## ❗IMPORTANT
+## 📚 Dependencies
+
+- **sqlalchemy** (version 2.0.x) is an ORM and provides code for its models,
+- **oracledb** (version 1.4.x) is used to shape a database table model with an oracle table schema.
+
+
+## ❗IMPORTANT Note
 
 In some cases you will need to correct the code manually. 
 This will be in case when:
