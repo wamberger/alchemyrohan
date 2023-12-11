@@ -44,7 +44,7 @@ python3 setup.py install
 ```
 
 
-## Database Support 🗄
+## Database Support
 
 This project is currently designed to work with the following databases:
 
@@ -228,7 +228,7 @@ This will be in case when:
 ## 📋 Release Notes
 
 
-* ***v0.1.0*** - creating initial code and tested with SqLite database
+* ***v0.1.0*** - creation of the initial code and tested with SqLite database
 * ***v0.2.0*** - tested with Oracle database
 * ***v0.3.0*** - added additional functions
 * ***v0.3.1*** - bug fixing
