@@ -14,8 +14,8 @@ Alchemyrohan is an extension package for **[SqlAlchemy](https://www.sqlalchemy.o
 
 - [How to Install](#-How-to-Install)
 - [Database Support](#-Database-Support)
-- [How to use](#How-to-use)
-  - [Functions](#Functions)
+- [How to use](#-How-to-use)
+  - [Functions](#-Functions)
   - [Models](#-Models)
 - [Example](#-Example)
 - [Dependencies](#-Dependencies)
@@ -50,7 +50,7 @@ This project is currently designed to work with the following databases:
 - **Oracle**
 
 
-## ✏️ How to use
+## 🔨 How to use
 
 Import in your code:
 
@@ -60,7 +60,7 @@ or
 
 `import alchemyrohan as ar`
 
-### ⚗️ Functions
+### 🪄 Functions
 
 - **assemble_model()** is the main function. This function is used to create a SqlAlchemy database model and is accepting the following arguments:
     | argument | description |
