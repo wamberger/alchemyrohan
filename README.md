@@ -12,18 +12,18 @@ Alchemyrohan is an extension package for **[SqlAlchemy](https://www.sqlalchemy.o
 
 ## 📖 Content
 
-- [How to Install](#How-to-Install)
-- [Database Support](#Database-Support)
-- [How to use](#How-to-use)
-  - [Functions](#Functions)
-  - [Models](#Models)
-- [Examples](#Examples)
+- [How to Install](#-How-to-Install)
+- [Database Support](#-Database-Support)
+- [How to use](#-How-to-use)
+  - [Functions](#-Functions)
+  - [Models](#-Models)
+- [Examples](#-Examples)
   - [Simple Example](#Simple-example)
   - [Model Example](#Example-of-one-created-model)
-- [Dependencies](#Dependencies)
+- [Dependencies](#-Dependencies)
 - [Important Note](#Important-Note)
-- [Release Notes](#Release-Notes)
-- [License](#License-and-Third-Party-Licenses)
+- [Release Notes](#-Release-Notes)
+- [License](#-License-and-Third-Party-Licenses)
 
 
 
@@ -44,7 +44,7 @@ python3 setup.py install
 ```
 
 
-## Database Support
+## 🗄 Database Support
 
 This project is currently designed to work with the following databases:
 
@@ -62,7 +62,7 @@ or
 
 `import alchemyrohan as ar`
 
-### Functions
+### ⚗️ Functions
 
 - **assemble_model()** is the main function. This function is used to create a SqlAlchemy database model and is accepting the following arguments:
     | argument | description |
@@ -88,7 +88,7 @@ or
 
 - **is_module()** this is optional function if you want to check the pythonic path. It needs <*py_path_to_model*> argument.
 
-### Models
+### 🗂 Models
 
 Created SqlAlchemy models have some additional features:
 
