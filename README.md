@@ -10,10 +10,10 @@ Alchemyrohan is an extension package for **[SqlAlchemy](https://www.sqlalchemy.o
 
 ---
 
-## Content
+## 📖 Content
 
 - [How to Install](#How-to-Install)
-- [Database Support](#Database-Support)
+- [Database Support](#🗄Database-Support)
 - [How to use](#How-to-use)
   - [Functions](#Functions)
   - [Models](#Models)
@@ -21,6 +21,8 @@ Alchemyrohan is an extension package for **[SqlAlchemy](https://www.sqlalchemy.o
   - [Simple Example](#Simple-example)
   - [Model Example](#Example-of-one-created-model)
 - [Dependencies](#Dependencies)
+- [Release Notes](#Release-Notes)
+- [Important Note](#Important-Note)
 - [License](#License-and-Third-Party-Licenses)
 
 
@@ -211,7 +213,7 @@ class Child(Base):
 - **oracledb** (version 1.4.x) is used to shape a database table model with an oracle table schema.
 
 
-## ❗IMPORTANT Note
+## ❗Important Note
 
 In some cases you will need to correct the code manually. 
 This will be in case when:
@@ -226,7 +228,7 @@ This will be in case when:
 ## 📋 Release Notes
 
 
-* ***v0.1.0*** - writing code and tested with SqLite database  
+* ***v0.1.0*** - creating initial code and tested with SqLite database
 * ***v0.2.0*** - tested with Oracle database
 * ***v0.3.0*** - added additional functions
 * ***v0.3.1*** - bug fixing
