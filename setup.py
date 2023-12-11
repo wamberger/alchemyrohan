@@ -15,7 +15,7 @@ def parse_requirements(filename):
 
 setup(
     name="alchemyrohan",
-    version="0.3.1",
+    version="0.3.2",
     packages=find_packages(),
     install_requires=parse_requirements('requirements.txt'),
     author="Alan Wamberger",
@@ -31,6 +31,7 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
     ],
