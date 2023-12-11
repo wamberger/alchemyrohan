@@ -75,7 +75,7 @@ All models are named with the same naming convention as they are in the database
 ## 📚 Dependencies
 
 - **sqlalchemy** (version 2.0.x) is an ORM and provides code for its models,
-- **oracledb** (version 1.4.x) is used to shape a database table model with oracle table schema.
+- **oracledb** (version 1.4.x) is used to shape a database table model with an oracle table schema.
 
 
 ## 📋 Development and DB-Support
@@ -213,7 +213,7 @@ The following software components are included in this project:
 * SqlAlchemy (MIT License)
 * python-oracledb (Apache License 2.0) 
 
-[THIRD_PARTY_LICENSES][2]
+[THIRD PARTY LICENSES][2]
 
 
 [1]: https://github.com/wamberger/alchemyrohan/blob/master/LICENSE
