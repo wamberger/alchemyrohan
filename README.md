@@ -72,21 +72,6 @@ Created SqlAlchemy models have some additional features:
 All models are named with the same naming convention as they are in the database with one difference, they are capitalized (python class naming convention).
 
 
-## 📚 Dependencies
-
-- **sqlalchemy** (version 2.0.x) is an ORM and provides code for its models,
-- **oracledb** (version 1.4.x) is used to shape a database table model with an oracle table schema.
-
-
-## 📋 Development and DB-Support
-
-Currently supports SqLite and Oracle Database.
-
-* ***v0.1.0*** - writing code and tested with SqLite database  
-* ***v0.2.0*** - tested with Oracle database
-* ***v0.3.1*** - added additional functions and bug/text fixing.
-
-
 ## 📝 Examples
 
 **Simple example**:
@@ -134,7 +119,7 @@ exit(-1)
 
 ~~~
 
-**Example of a model**:
+**Example of one created model**:
 
 ~~~python
 
@@ -193,6 +178,21 @@ class Child(Base):
 
 ~~~ 
 
+
+## 🗄 Database Support
+
+This project is currently designed to work with the following databases:
+
+- **SqLite**
+- **Oracle**
+
+
+## 📚 Dependencies
+
+- **sqlalchemy** (version 2.0.x) is an ORM and provides code for its models,
+- **oracledb** (version 1.4.x) is used to shape a database table model with an oracle table schema.
+
+
 ## ❗IMPORTANT
 
 In some cases you will need to correct the code manually. 
@@ -203,6 +203,17 @@ This will be in case when:
 - your tables have no primary keys. SqlAlchemy needs one primary key.
 
 - your database has some datatypes or features which were not yet been testet.
+
+
+## 📋 Release Notes
+
+
+* ***v0.1.0*** - writing code and tested with SqLite database  
+* ***v0.2.0*** - tested with Oracle database
+* ***v0.3.0*** - added additional functions
+* ***v0.3.1*** - bug fixing
+* ***v0.3.2*** - text fixing and adding third party licenses
+
 
 ## 📄 License and Third-Party Licenses
 

@@ -12,7 +12,7 @@ More in < README.md > file
 
 
 __author__ = 'Alan Wamberger'
-__version__ = '0.3.1'
+__version__ = '0.3.2'
 __license__ = 'MIT'
 
 
