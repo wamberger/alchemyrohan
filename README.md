@@ -23,6 +23,7 @@ Alchemyrohan is an extension package for **[SqlAlchemy](https://www.sqlalchemy.o
 - [Release Notes](#-Release-Notes)
 - [License](#-License-and-Third-Party-Licenses)
 
+---
 
 
 ## 🔧 How to Install
@@ -216,11 +217,11 @@ class Child(Base):
 In some cases you will need to correct the code manually. 
 This will be in case when:
 
-- your are creating only one model which has relationship to other tables, thus you will need to create also those models or delete the part of the code.
+- Your are creating only one model which has relationship to other tables, thus you will need to create also those models or delete the part of the code
 
-- your tables have no primary keys. SqlAlchemy needs one primary key.
+- Your tables have no primary keys. SqlAlchemy needs one primary key
 
-- your database has some datatypes or features which were not yet been testet.
+- Your database has some datatypes or features which were not yet been testet
 
 
 ## 📋 Release Notes
