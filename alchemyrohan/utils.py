@@ -3,7 +3,7 @@
 import os
 import importlib
 
-from typing import Type
+from typing import Type, Union
 from sqlalchemy.ext.declarative import DeclarativeMeta
 
 from alchemyrohan.meta_data import MetaDataHolder
@@ -38,11 +38,11 @@ def str_print(
 
 def is_model(
     table_name: str,
-    abs_os_path_to_model: str,
+    abs_path_to_model: str,
     ) -> bool:
 
     if os.path.isfile(os.path.join(
-            abs_os_path_to_model, 
+            abs_path_to_model, 
             table_name.capitalize() + '.py'
             )):
         return True
@@ -71,7 +71,20 @@ def reload_module(
 def get_model(
     table_name: str,
     py_path_to_model: str
-    ) -> Type[DeclarativeMeta] or None:
+    ) -> Union[Type[DeclarativeMeta], None]:
+    """
+    Retrieves the desired database object of the SqlAlchemy model
+
+    Args:
+        table_name (str): Name of the database table.
+        py_path_to_model (str): Pythonic path to the models in 
+            the project.
+
+    Returns:
+        Union[Type[DeclarativeMeta], None]: A SQLAlchemy model 
+            class if found, or None if not found.
+            
+    """
 
     module = importlib.import_module(
         f'{py_path_to_model}.{table_name.capitalize()}')

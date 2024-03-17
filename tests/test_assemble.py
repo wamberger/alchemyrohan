@@ -10,8 +10,7 @@ sys.path.append(
     )
 )
 
-from sqlalchemy import create_engine
-from alchemyrohan.assemble import assemble_model
+from alchemyrohan.assemble import assemble_models
 
 
 class TestAssemble(unittest.TestCase):
@@ -19,28 +18,25 @@ class TestAssemble(unittest.TestCase):
     def test_assemble_model_sqlite_db(self):
 
         dir = os.path.dirname(__file__)
-        conn = f"sqlite:///{dir}{os.sep}test_sqlite{os.sep}test.db"
-        abs_os_path_to_model = os.path.join(dir, 'test_model')
-        py_path_to_model = 'tests.test_model'
+        db_creds = f"sqlite:///{dir}{os.sep}test_sqlite{os.sep}test.db"
+        abs_path_to_models = os.path.join(dir, 'test_models')
+        py_path_to_models = 'tests.test_models'
 
-        test_cases = [
+        table_names = [
             'parent',
             'child'
         ]
 
-        for table_name in test_cases:
-            try:
-                engine = create_engine(conn)
-
-                assemble_model(
-                    engine, 
-                    table_name, 
-                    abs_os_path_to_model,
-                    py_path_to_model
-                    )
-            except Exception as e:
-                self.fail(
-                    f"Sqlite - Function raised an unexpected exception: {e}")
+        try:
+            assemble_models(
+                db_creds, 
+                table_names, 
+                abs_path_to_models,
+                py_path_to_models
+                )
+        except Exception as e:
+            self.fail(
+                f"Sqlite - Function raised an unexpected exception: {e}")
 
 
 if __name__ == '__main__':

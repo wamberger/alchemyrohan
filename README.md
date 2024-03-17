@@ -6,7 +6,7 @@
  ![pypi v22.0.3](https://img.shields.io/badge/pypi-v22.0.3-yellow) ![Python 3.9 | 3.10 | 3.11](https://img.shields.io/badge/python-3.9_|_3.10_|_3.11-blue) ![SqlAlchemy](https://img.shields.io/badge/SqlAlchemy-2.0-red)
 
 
-Alchemyrohan is an extension package for **[SqlAlchemy](https://www.sqlalchemy.org/)** which automatically creates the database models according to the database schema.
+Alchemyrohan is a tool for **[SqlAlchemy](https://www.sqlalchemy.org/)** that helps to create database models based on the database schema.
 
 ---
 
@@ -16,6 +16,8 @@ Alchemyrohan is an extension package for **[SqlAlchemy](https://www.sqlalchemy.o
 - [Database Support](#-Database-Support)
 - [How to use](#-How-to-use)
   - [Functions](#-Functions)
+    - [Main Function](#-Main-Function)
+    - [Optional Functions](#-Optional-Functions)
   - [Models](#-Models)
 - [Example](#-Example)
 - [Dependencies](#-Dependencies)
@@ -61,42 +63,48 @@ or
 
 `import alchemyrohan as ar`
 
+
 ### 🪄 Functions
 
-- **assemble_model()** is the main function. This function is used to create a SqlAlchemy database model and is accepting the following arguments:
+#### 🔮 Main Function
+
+- **assemble_models()** is the main function. This function is used to create a SqlAlchemy database model and is accepting the following arguments:
     | argument | description |
     | --------- | --------- |
-    | *engine* | this is SqlAlchemy engine  `from sqlalchemy import create_engine` |
-    | *table_name* | this is the name of the database table |
-    | *abs_os_path_to_model* | absolute path to the model's folder |
+    | *db_creds* | Credential string to connect to the database |
+    | *table_names* | Names of the tables |
+    | *abs_path_to_models* | Absolute path to the location where the created models will be saved |
     | *py_path_to_model* | pythonic path to the models |
 
-- **reload_module()** when the code and file are created, the new code needs to be compiled - if the function <*assemble_model*> is called inside a program which will use the new created models. Thus you need to call the *reload* function. You will need to add pythonic path/import:
+
+#### 💉 Optional Functions
+
+- **is_model():** This function is used to check if the model exists. You need to pass the *table_name* and *abs_path_to_model* arguments.
+
+- **get_model():** It retrieves the desired database object of the SqlAlchemy model. It requires the *table_name* and *py_path_to_model* arguments.
+
+- **is_module():** This function is used to check the Pythonic path. It requires the *py_path_to_model* argument.
+
+- **reload_module():** If you have a specific reason for using the code in production or creating models in a running script, you may need to compile the newly created code. In such cases, you will need to use this function. Here's how you do it:
 
     ~~~python
-    import tests.test_model
+    import tests.test_models
 
     ...some code...
 
-    reload_module(tests.test_model)
+    reload_module(tests.test_models)
     ~~~
-
-- **is_model()** this function is used to check if the model was created. You need to pass the <*table_name*> and <*abs_os_path_to_model*> arguments.
-
-- **get_model()** you will retrieve the wanted database object of the SqlAlchemy model. It needs the <*table_name*> and <*py_path_to_model*> arguments.
-
-- **is_module()** this is optional function if you want to check the pythonic path. It needs <*py_path_to_model*> argument.
 
 ### 🗂 Models
 
 Created SqlAlchemy models have some additional features:
 
-- default values
-- parent-child relationships
-- <*_post_init_*> method is used as validation
-- when 'printing' the string will contain the model/object name and attributes names with their values.
+- Default values.
+- Parent-child relationships.
+- The *_post_init_* method is used for validation.
+- When 'printing', the string will contain the model/object name and attribute names with their values.
 
-All models are named with the same naming convention as they are in the database with one difference, they are capitalized (python class naming convention).
+All models are named with the same convention as they are in the database, with one difference: they are capitalized according to Python class naming conventions.
 
 
 ## 📝 Example
@@ -104,45 +112,33 @@ All models are named with the same naming convention as they are in the database
 **Simple example how to use the code:**
 
 ~~~python
+
 import os
-from sqlalchemy import create_engine
 
-from alchemyrohan.assemble import assemble_model
-from alchemyrohan.utils import is_model
-from alchemyrohan.utils import get_model
-from alchemyrohan.utils import reload_module
-
-import tests.test_model
+from alchemyrohan.assemble import assemble_models
 
 dir = os.path.dirname(__file__)
-conn = f"sqlite:///{dir}{os.sep}test_sqlite{os.sep}test.db"
 
-engine = create_engine(conn)
-table_name = 'child' # all names will be capitilized
-abs_os_path_to_model = os.path.join(dir, 'test_model') # path
-py_path_to_model = 'tests.test_model' # pythonic path
+# Sqlite example
+db_creds = f"sqlite:///{dir}{os.sep}test_sqlite{os.sep}test.db"
+# Oracle-Database example
+#db_creds = f'oracle+cx_oracle://{username}:{password}@{hostname}:{port}/{service_name}'
+
+abs_os_path_to_model = os.path.join(dir, 'test_models') # path to save models
+py_path_to_model = 'tests.test_models' # pythonic path to models
+table_names = ['parent', 'child'] # all names will be capitilized
 
 try:
-    assemble_model(
-        engine, 
-        table_name, 
-        abs_os_path_to_model,
+    assemble_models(
+        db_creds, 
+        table_names, 
+        abs_path_to_models,
         py_path_to_model
         )
+    exit(0)
 except Exception as e:
     print(e)
     exit(1)
-
-reload_module(tests.test_model) # compile the new code
-
-if is_model(table_name, abs_os_path_to_model):
-    model = get_model(table_name, py_path_to_model)
-    print(f'SqlAlchemy model exist: {model}')
-    
-    exit(0)
-
-print(f'Something unexpected went wrong')
-exit(-1)
 
 ~~~
 
@@ -151,7 +147,7 @@ exit(-1)
 ~~~python
 
 from sqlalchemy import Column
-from tests.test_model import Base
+from tests.test_models import Base
 from sqlalchemy.dialects.sqlite import INTEGER
 from sqlalchemy.dialects.sqlite import TEXT
 from sqlalchemy.orm import relationship
@@ -208,35 +204,43 @@ class Child(Base):
 
 ## 📚 Dependencies
 
-- **sqlalchemy** (version 2.0.x) is an ORM and provides code for its models,
-- **oracledb** (version 1.4.x) is used to shape a database table model with an oracle table schema.
+- **sqlalchemy** (version 2.0.x) is an ORM and provides code for its models.
+- **oracledb** (version 1.4.x) is used to shape a database table model with an Oracle table schema.
 
 
 ## ❗Important Note
 
-In some cases you will need to correct the code manually. 
-This will be in case when:
+In most cases, you will need to correct the code manually. 
+This will be the case when:
 
-- Your are creating only one model which has relationship to other tables, thus you will need to create also those models or delete the part of the code
+- You are not adding a Pythonic path.
 
-- Your tables have no primary keys. SqlAlchemy needs one primary key
+- You are creating only one model which has relationships to other tables, thus you will need to create those models or delete the relevant part of the code.
 
-- Your database has some datatypes or features which were not yet been testet
+- Your tables have no primary keys. SQLAlchemy requires at least one primary key.
+
+- Your database may have some data types or features which have not yet been tested.
 
 
 ## 📋 Release Notes
 
 
-* ***v0.1.0*** - creation of the initial code and tested with SqLite database
-* ***v0.2.0*** - tested with Oracle database
-* ***v0.3.0*** - added additional functions
-* ***v0.3.1*** - bug fixing
-* ***v0.3.2*** - text fixing and adding third party licenses
+- ***v0.1.0*** - creation of the initial code and tested with SqLite database
+- ***v0.2.0*** - tested with Oracle database
+- ***v0.3.0*** - added additional functions
+- ***v0.3.1*** - bug fixing
+- ***v0.3.2*** - text fixing and adding third party licenses
+- ***v0.4.0*** - Main update! Not compatible with previous versions. Changes:
+    - Changed function name from *assemble_model()* to *assemble_models()*.
+    - Updated parameters of the *assemble_models()* function.
+    - Revised code structure of the *assemble_models()* function.
+    - Adjusted naming or added text in *utils.py*, *wizard.py* and *__init__py*.
+    - Updated README.md file.
 
 
 ## 📄 License and Third-Party Licenses
 
-Alchemyrohan is MIT licensed, as found in the [LICENSE][1] file.
+Alchemyrohan is MIT licensed, as stated in the [LICENSE][1] file.
 
 The following software components are included in this project:
 

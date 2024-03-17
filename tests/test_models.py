@@ -20,7 +20,7 @@ class TestAssemble(unittest.TestCase):
 
         dir = os.path.dirname(__file__)
         table_name = 'parent'
-        abs_os_path_to_model = os.path.join(dir, 'test_model')
+        abs_path_to_model = os.path.join(dir, 'test_models')
 
         test_cases = [
             ('parent', True),
@@ -30,20 +30,20 @@ class TestAssemble(unittest.TestCase):
         for table_name, expected_result in test_cases:
             result = is_model(
                     table_name, 
-                    abs_os_path_to_model
+                    abs_path_to_model
                 )
             self.assertEqual(result, expected_result)
 
 
     def test_get_model(self):
 
-        from tests.test_model.Parent import Parent
-        from tests.test_model.Child import Child
+        from tests.test_models.Parent import Parent
+        from tests.test_models.Child import Child
 
         
-        py_path_to_model = 'tests.test_model'
+        py_path_to_model = 'tests.test_models'
         test_cases = [
-            ('parent', Parent)
+            ('parent', Parent),
             ('child', Child)
         ]
 

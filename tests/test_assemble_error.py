@@ -10,8 +10,7 @@ sys.path.append(
     )
 )
 
-from sqlalchemy import create_engine
-from alchemyrohan.assemble import assemble_model
+from alchemyrohan.assemble import assemble_models
 
 
 class TestAssembleError(unittest.TestCase):
@@ -20,15 +19,14 @@ class TestAssembleError(unittest.TestCase):
     def test_assemble_model_with_error(self):
 
         dir = os.path.dirname(__file__)
-        conn = f"sqlite:///{dir}{os.sep}sqlite{os.sep}test.db"
-        table_name = 'parent'
+        db_creds = f"sqlite:///{dir}{os.sep}sqlite{os.sep}test.db"
+        table_names = ['parent', 'child']
         abs_os_path_to_model = f"{dir}"
         py_path_to_model = 'error.path'
 
-        engine = create_engine(conn)
-        assemble_model(
-            engine, 
-            table_name, 
+        assemble_models(
+            db_creds, 
+            table_names, 
             abs_os_path_to_model,
             py_path_to_model
             )

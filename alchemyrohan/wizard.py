@@ -156,7 +156,7 @@ def generate_init_file(
         model_name = table_name.capitalize()
 
         template = f"""
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
 
