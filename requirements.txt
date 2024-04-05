@@ -2,4 +2,3 @@
 
 sqlalchemy
 oracledb
-#cx_oracle # obsolete

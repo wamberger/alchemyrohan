@@ -3,8 +3,9 @@
 import os
 import sqlite3
 
-dir = os.path.dirname(__file__)
-conn = sqlite3.connect(f'{dir}{os.sep}test.db')
+
+dir1 = os.path.dirname(__file__)
+conn = sqlite3.connect(f'{dir1}{os.sep}test.db')
 cursor = conn.cursor()
 
 cursor.execute('''

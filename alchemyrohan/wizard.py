@@ -60,9 +60,7 @@ def generate_model(
 
 
 def generate_code(
-    table_meta_data: MetaDataHolder,
-    py_path_to_model: str
-    ) -> dict:
+        table_meta_data: MetaDataHolder, py_path_to_model: str) -> dict:
 
     imp = f'from {py_path_to_model} import Base'
     if imp not in std_imports:
@@ -83,8 +81,7 @@ def generate_code(
         read_sqlite_and_build_code(code_holder, table_meta_data)
 
     elif table_meta_data.rdbms == 'mysql':  
-        
-        None
+        ...
         # TODO
 
     elif table_meta_data.rdbms == 'oracle':  
@@ -95,8 +92,7 @@ def generate_code(
     
     else:
         raise AlchemyRohanDatabaseError(
-            f'No supported dialect: {table_meta_data.rdbms}'
-            )
+            f'No supported dialect: {table_meta_data.rdbms}')
 
     return code_holder
 

@@ -4,11 +4,9 @@ import sys
 import os
 import unittest
 
+
 sys.path.append(
-    os.path.join(
-    os.path.dirname(os.path.dirname(__file__)),
-    )
-)
+    os.path.join(os.path.dirname(os.path.dirname(__file__)),))
 
 from alchemyrohan.assemble import assemble_models
 

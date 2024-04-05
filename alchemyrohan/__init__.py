@@ -22,5 +22,4 @@ __license__ = 'MIT'
 __copyright__ = '2023 %s' % __author__
 
 
-from alchemyrohan.assemble import *
-from alchemyrohan.utils import *
+from alchemyrohan.assemble import assemble_models

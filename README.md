@@ -3,10 +3,11 @@
 
 # Alchemyrohan
 
- ![pypi v22.0.3](https://img.shields.io/badge/pypi-v22.0.3-yellow) ![Python 3.9 | 3.10 | 3.11](https://img.shields.io/badge/python-3.9_|_3.10_|_3.11-blue) ![SqlAlchemy](https://img.shields.io/badge/SqlAlchemy-2.0-red)
+ ![pypi v22.0.3](https://img.shields.io/badge/pypi-v22.0.3-yellow) ![Python 3.11 | 3.12](https://img.shields.io/badge/python-3.11_|_3.12-blue) ![SqlAlchemy](https://img.shields.io/badge/SqlAlchemy-2.0-red)
 
 
-Alchemyrohan is a tool for **[SqlAlchemy](https://www.sqlalchemy.org/)** that helps to create database models based on the database schema.
+Alchemyrohan is a helpful tool for creating **[SqlAlchemy](https://www.sqlalchemy.org/)** models 
+based on the database schema.
 
 ---
 
