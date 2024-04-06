@@ -26,7 +26,7 @@ keywords = ["alchemyrohan", "database", "SQLAlchemy", "models"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "Topic :: Microframework :: Build Tools",
+    "Topic :: Tool :: Build Tools",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.12",
@@ -42,4 +42,4 @@ Changelog = "https://github.com/wamberger/alchemyrohan/blob/master/CHANGELOG.md"
 
 
 [project.scripts]
-siswork-build = "siswork.gen_prj.build:build_project"
+arohan = "alchemyrohan.assemble:main"

@@ -1,5 +1,8 @@
 
 
+__all__ = ['read_oracle_and_build_code']
+
+
 from typing import Any
 from datetime import datetime
 from datetime import timedelta
@@ -29,10 +32,7 @@ from alchemyrohan.meta_data import MetaDataHolder
 from alchemyrohan.utils import str_print
 
 
-__all__ = ['read_oracle_and_build_code']
-
-
-_dialect_imports = []
+dialect_imports = []
 
 
 def _get_default(typ: str) -> Any:
@@ -196,8 +196,7 @@ def _get_validation(typ: str, col: str) -> str:
                 raise SyntaxError(f'< {{self.{col}}} > is not integer')
         """
     
-    elif typ == 'BLOB'\
-    or typ == 'RAW':
+    elif typ == 'BLOB' or typ == 'RAW':
         tmp = f"""
         if self.{col} and not isinstance(self.{col}, bytes):
             try:
@@ -206,8 +205,7 @@ def _get_validation(typ: str, col: str) -> str:
                 raise SyntaxError(f'< {{self.{col}}} > is not bytes type')
         """
     
-    elif typ == 'DATE'\
-    or typ == 'TIMESTAMP':
+    elif typ == 'DATE' or typ == 'TIMESTAMP':
         tmp = f"""
         if self.{col} and not isinstance(self.{col}, datetime):
             try:
@@ -246,26 +244,17 @@ def _get_validation(typ: str, col: str) -> str:
     return tmp
 
 
-def _validations(
-    code_holder: dict, 
-    table_meta_data: MetaDataHolder
-    ) -> None:
+def _validations(code_holder: dict, table_meta_data: MetaDataHolder) -> None:
 
     col = []
     for c in table_meta_data.columns:
-        col.append(_get_validation(
-            _get_type_name(c['type']), 
-            c['name']
-            )
-        )
+        col.append(
+            _get_validation(_get_type_name(c['type']), c['name']))
 
     code_holder.update({'validations': col})
 
 
-def _columns(
-    code_holder: dict, 
-    table_meta_data: MetaDataHolder
-    ) -> None:
+def _columns(code_holder: dict, table_meta_data: MetaDataHolder) -> None:
     
     col = []
     for c in table_meta_data.columns:
@@ -275,8 +264,8 @@ def _columns(
 
         imp = f"from sqlalchemy.dialects.oracle import"\
             f" {_get_type_name(c['type'])}"
-        if imp not in _dialect_imports:
-            _dialect_imports.append(imp)
+        if imp not in dialect_imports:
+            dialect_imports.append(imp)
 
         pk = False
         for k, v in table_meta_data.primary_key.items():
@@ -298,8 +287,8 @@ def _columns(
                             f"ForeignKey('{ref_table}.{fk}')"]
                             )
                         imp = 'from sqlalchemy import ForeignKey'
-                        if imp not in _dialect_imports:
-                            _dialect_imports.append(imp)
+                        if imp not in dialect_imports:
+                            dialect_imports.append(imp)
                         break
 
             if c['nullable']:
@@ -333,10 +322,7 @@ def _columns(
     code_holder.update({'columns': col})
 
 
-def _relations(
-    code_holder: dict, 
-    table_meta_data: MetaDataHolder
-    ) -> None:
+def _relations(code_holder: dict, table_meta_data: MetaDataHolder) -> None:
 
     rel = []
     for f in table_meta_data.foreign_keys:
@@ -373,19 +359,17 @@ def _relations(
                     
     if rel:
         imp = 'from sqlalchemy.orm import relationship'
-        if imp not in _dialect_imports:
-            _dialect_imports.append(imp)
+        if imp not in dialect_imports:
+            dialect_imports.append(imp)
 
     code_holder.update(
-        {'imports': code_holder['imports'] + _dialect_imports}
+        {'imports': code_holder['imports'] + dialect_imports}
         )
     code_holder.update({'relations': rel})
 
 
 def read_oracle_and_build_code(
-    code_holder: dict, 
-    table_meta_data: MetaDataHolder
-    ) -> None:
+        code_holder: dict, table_meta_data: MetaDataHolder) -> None:
 
     _columns(code_holder, table_meta_data)
     _relations(code_holder, table_meta_data)

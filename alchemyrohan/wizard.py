@@ -1,62 +1,37 @@
 
 
-import os
-
-from alchemyrohan.meta_data import *
-
-
 __all__ = [
     'generate_model',
     'generate_code',
     'generate_init_file',
-    'construct_model',
-    'AlchemyRohanPathError'
-]   
+    'construct_model'
+    ]
+
+import os
+
+from sqlalchemy.exc import SQLAlchemyError
+from alchemyrohan.meta_data import MetaDataHolder
+
+std_imports = ['from sqlalchemy import Column']
 
 
-std_imports = [
-    'from sqlalchemy import Column'
-]
-
-
-class AlchemyRohanPathError(Exception): ...
-
-class AlchemyRohanGenerateModelError(Exception): ...
-
-
-def _write_template(
-        file: str, 
-        mode: str,
-        template: str
-        ) -> None:
-    
+def _write_template(file: str, mode: str, template: str) -> None:
     with open(file, mode) as f:
         f.write(template)
         f.close()
 
 
 def generate_model(
-    filename: str,
-    model_template: str,
-    abs_os_path_to_model: str
-    ) -> None:
-
-    if os.path.isdir(abs_os_path_to_model):
-        file = os.path.join(
-            abs_os_path_to_model, 
-            filename.capitalize() + '.py'
-            )
+        filename: str, model_template: str, path: str) -> None:
+    if os.path.isdir(path):
+        file = os.path.join(path, filename.capitalize() + '.py')
     else:
-        raise AlchemyRohanPathError(
-            f'No path: {abs_os_path_to_model}'
-            )
+        raise SQLAlchemyError(f'No path: {path}')
     
     try:
-        
         _write_template(file, 'w', model_template)
-
-    except Exception as e:
-        raise AlchemyRohanGenerateModelError(e)
+    except SQLAlchemyError as e:
+        raise SQLAlchemyError(e) from e
 
 
 def generate_code(
@@ -91,25 +66,23 @@ def generate_code(
         read_oracle_and_build_code(code_holder, table_meta_data)
     
     else:
-        raise AlchemyRohanDatabaseError(
+        raise SQLAlchemyError(
             f'No supported dialect: {table_meta_data.rdbms}')
 
     return code_holder
 
 
-def construct_model(
-    code_holder: dict
-    ) -> str:
+def construct_model(code_holder: dict) -> str:
 
-    def _add(tmp_list):
+    def _add(tmp_list: list) -> str:
         for e in tmp_list:
             yield e
 
-    BACKSLASH = '\n'
+    backslash = '\n'
 
     template = f"""
 
-{f'{BACKSLASH}'.join(_add(code_holder['imports']))}
+{f'{backslash}'.join(_add(code_holder['imports']))}
 
 
 {code_holder['class_name']}
@@ -119,7 +92,7 @@ def construct_model(
 
 {''.join(_add(code_holder['relations']))}
 
-    def __post_init__(self):
+    def validate(self):
 {''.join(code_holder['validations'])}
     
     def __str__(self):
@@ -129,26 +102,16 @@ def construct_model(
     return template
 
 
-def generate_init_file(
-    table_name: str,
-    abs_os_path_to_model: str,
-    py_path_to_model: str
-    ) -> None:
+def generate_init_file(table_name: str, path: str, py_path: str) -> None:
 
-    file = os.path.join(
-        abs_os_path_to_model, 
-        '__init__.py'
-        )
+    file = os.path.join(path, '__init__.py')
 
     if os.path.isfile(file):
-        
         model_name = table_name.capitalize()
-        template = f'\nfrom {py_path_to_model}.{model_name} import {model_name}'
+        template = f'\nfrom {py_path}.{model_name} import {model_name}'
 
         _write_template(file, 'a', template)
-
     else:
-
         model_name = table_name.capitalize()
 
         template = f"""
@@ -156,7 +119,7 @@ from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
 
-from {py_path_to_model}.{model_name} import {model_name}
+from {py_path}.{model_name} import {model_name}
 """
         
         _write_template(file, 'w', template)

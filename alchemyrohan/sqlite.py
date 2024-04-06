@@ -1,5 +1,8 @@
 
 
+__all__ = ['read_sqlite_and_build_code']
+
+
 from typing import Any
 from sqlalchemy.dialects.sqlite import TEXT
 from sqlalchemy.dialects.sqlite import INTEGER
@@ -10,10 +13,7 @@ from alchemyrohan.meta_data import MetaDataHolder
 from alchemyrohan.utils import str_print
 
 
-__all__ = ['read_sqlite_and_build_code']
-
-
-_dialect_imports = []
+dialect_imports = []
 
 
 def _get_default(typ: str) -> Any:
@@ -41,8 +41,7 @@ def _get_type(typ: Any) -> str:
 def _get_validation(typ: str, col: str) -> str:
     
     tmp: str = ''
-    if typ == 'TEXT'\
-    or typ == 'BLOB':
+    if typ == 'TEXT':
         tmp = f"""
         if self.{col} and not isinstance(self.{col}, str):
             try:
@@ -69,29 +68,29 @@ def _get_validation(typ: str, col: str) -> str:
                 raise SyntaxError(f'< {{self.{col}}} > is not float')
         """
 
+    elif typ == 'BLOB':
+        tmp = f"""
+        if self.{col} and not isinstance(self.{col}, bytes):
+            try:
+                self.{col} = int(self.{col})
+            except:
+                raise SyntaxError(f'< {{self.{col}}} > is not bytes')
+        """
+
     return tmp
 
 
-def _validations(
-    code_holder: dict, 
-    table_meta_data: MetaDataHolder
-    ) -> None:
+def _validations(code_holder: dict, table_meta_data: MetaDataHolder) -> None:
 
     col = []
     for c in table_meta_data.columns:
-        col.append(_get_validation(
-            _get_type(c['type']), 
-            c['name']
-            )
-        )
+        col.append(
+            _get_validation(_get_type(c['type']), c['name']))
 
     code_holder.update({'validations': col})
 
 
-def _columns(
-    code_holder: dict, 
-    table_meta_data: MetaDataHolder
-    ) -> None:
+def _columns(code_holder: dict, table_meta_data: MetaDataHolder) -> None:
     
     col = []
     for c in table_meta_data.columns:
@@ -99,24 +98,22 @@ def _columns(
         tmp = f"{c['name']} = Column("
         tmp = ''.join([tmp, _get_type(c['type'])])
         imp = f"from sqlalchemy.dialects.sqlite import {_get_type(c['type'])}"
-        if imp not in _dialect_imports:
-            _dialect_imports.append(imp)
+        if imp not in dialect_imports:
+            dialect_imports.append(imp)
 
         if c['primary_key'] == 1:
             tmp = ', '.join([tmp, 'primary_key=True'])
         else:
 
             for f in table_meta_data.foreign_keys:
-                for fk in f['referred_columns']:
-                    if fk == c['name']:
-                        ref_table = f['referred_table']
+                for fk in f['constrained_columns']:
+                    if fk == c['name'] and f['referred_columns']:
+                        ref_col = f['referred_columns'][0]
+                        ref_table = f['referred_table'].lower()
                         tmp = ', '.join(
-                            [tmp, 
-                            f"ForeignKey('{ref_table}.{fk}')"]
-                            )
+                            [tmp, f"ForeignKey('{ref_table}.{ref_col}')"])
                         code_holder['imports'].append(
-                            'from sqlalchemy import ForeignKey'
-                            )
+                            'from sqlalchemy import ForeignKey')
                         break
 
             if c['nullable']:
@@ -151,9 +148,7 @@ def _columns(
 
 
 def _relations(
-    code_holder: dict, 
-    table_meta_data: MetaDataHolder
-    ) -> None:
+        code_holder: dict, table_meta_data: MetaDataHolder) -> None:
 
     rel = []
     for f in table_meta_data.foreign_keys:
@@ -174,7 +169,8 @@ def _relations(
             for child_table, r in table_meta_data.multi_foreign_keys.items():
                 if r:
                     for rt in r:
-                        if rt['referred_table'] == table_meta_data.name:
+                        if rt['referred_table'] == table_meta_data.name \
+                        or rt['referred_table'] == table_meta_data.name.capitalize():
                             tmp = f'children_{child_table[1].capitalize()}'\
                             f' = relationship("{child_table[1].capitalize()}",'\
                             f' back_populates="parent_{table_meta_data.name.capitalize()}",'\
@@ -189,19 +185,17 @@ def _relations(
                     
     if rel:
         imp = 'from sqlalchemy.orm import relationship'
-        if imp not in _dialect_imports:
-            _dialect_imports.append(imp)
+        if imp not in dialect_imports:
+            dialect_imports.append(imp)
 
     code_holder.update(
-        {'imports': code_holder['imports'] + _dialect_imports}
+        {'imports': code_holder['imports'] + dialect_imports}
         )
     code_holder.update({'relations': rel})
 
 
 def read_sqlite_and_build_code(
-    code_holder: dict, 
-    table_meta_data: MetaDataHolder
-    ) -> None:
+        code_holder: dict, table_meta_data: MetaDataHolder) -> None:
 
     _columns(code_holder, table_meta_data)
     _relations(code_holder, table_meta_data)

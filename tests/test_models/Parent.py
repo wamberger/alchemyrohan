@@ -6,6 +6,7 @@ from sqlalchemy.dialects.sqlite import INTEGER
 from sqlalchemy.dialects.sqlite import TEXT
 from sqlalchemy.dialects.sqlite import REAL
 from sqlalchemy.dialects.sqlite import BLOB
+from sqlalchemy.orm import relationship
 
 
 class Parent(Base):
@@ -19,8 +20,9 @@ class Parent(Base):
     is_active = Column(BLOB, nullable=True, default=None)
 
 
+    children_Child = relationship("Child", back_populates="parent_Parent", lazy="joined")
 
-    def __post_init__(self):
+    def validate(self):
 
         if self.id and not isinstance(self.id, int):
             try:
@@ -46,11 +48,11 @@ class Parent(Base):
             except:
                 raise SyntaxError(f'< {self.height} > is not float')
         
-        if self.is_active and not isinstance(self.is_active, str):
+        if self.is_active and not isinstance(self.is_active, bytes):
             try:
-                self.is_active = str(self.is_active)
+                self.is_active = int(self.is_active)
             except:
-                raise SyntaxError(f'< {self.is_active} > is not string')
+                raise SyntaxError(f'< {self.is_active} > is not bytes')
         
     
     def __str__(self):

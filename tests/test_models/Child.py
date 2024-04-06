@@ -2,6 +2,7 @@
 
 from sqlalchemy import Column
 from tests.test_models import Base
+from sqlalchemy import ForeignKey
 from sqlalchemy.dialects.sqlite import INTEGER
 from sqlalchemy.dialects.sqlite import TEXT
 from sqlalchemy.dialects.sqlite import REAL
@@ -14,14 +15,14 @@ class Child(Base):
 
 
     id = Column(INTEGER, primary_key=True)
-    parent_id = Column(INTEGER, nullable=True, default=None)
+    parent_id = Column(INTEGER, ForeignKey('parent.id'), nullable=True, default=None)
     name = Column(TEXT, nullable=True, default=None)
     grade = Column(INTEGER, nullable=True, default=None)
 
 
     parent_Parent = relationship("Parent", back_populates="children_Child", lazy="joined")
 
-    def __post_init__(self):
+    def validate(self):
 
         if self.id and not isinstance(self.id, int):
             try:

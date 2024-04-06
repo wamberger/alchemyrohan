@@ -23,3 +23,4 @@ __copyright__ = '2023 %s' % __author__
 
 
 from alchemyrohan.assemble import assemble_models
+from alchemyrohan.utils import get_model

@@ -1,26 +1,21 @@
 
 
-__all__ = [
-    'is_model',
-    'is_module',
-    'get_model',
-    'reload_module'
-    ]
+__all__ = ['get_model', 'str_print']
 
 
-import os
 import importlib
 
-from typing import Type, Union
-from sqlalchemy.ext.declarative import DeclarativeMeta
+from typing import Optional
+from typing import TypeVar
+from sqlalchemy.orm import declarative_base
+
 from alchemyrohan.meta_data import MetaDataHolder
 
 
+T = TypeVar('T', bound=declarative_base)
 
-def str_print(
-    code_holder: dict, 
-    table_meta_data: MetaDataHolder
-    ) -> None:
+
+def str_print(code_holder: dict, table_meta_data: MetaDataHolder) -> None:
 
     tmp = []
     a = "f'User("
@@ -36,42 +31,7 @@ def str_print(
     code_holder.update({'str_print': txt})
 
 
-def is_model(
-    table_name: str,
-    abs_path_to_model: str,
-    ) -> bool:
-
-    if os.path.isfile(os.path.join(
-            abs_path_to_model, 
-            table_name.capitalize() + '.py'
-            )):
-        return True
-    else:
-        return False
-    
-
-def is_module(
-    py_path_to_model: str
-    ) -> bool:
-
-    try:
-        importlib.import_module(py_path_to_model)
-        return True
-    except:
-        return False
-
-
-def reload_module(
-    py_path_to_model: object
-    ) -> None:
-
-    importlib.reload(py_path_to_model)
-
-
-def get_model(
-    table_name: str,
-    py_path_to_model: str
-    ) -> Union[Type[DeclarativeMeta], None]:
+def get_model(table_name: str, py_path_to_model: str) -> Optional[T]:
     """
     Retrieves the desired database object of the SqlAlchemy model
 

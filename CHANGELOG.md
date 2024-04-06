@@ -1,15 +1,25 @@
 
 # Change Log
 
-## [v0.4.1] - 2023-04-06
+## [v0.4.1] - 2024-04-06
 
-- changing parameter name from 'db_creds' to 'conn_str' in function 
+- Adding an option to execute it in command-line: *arohan*.
+- Changing parameter name from 'db_creds' to 'conn_str' in function 
 *assemble_models()*.
-- Typing hints.
-- refactoring the code,
-- Updating README.md.
+- Changing parameter name from 'abs_path_to_models' to 'path' in function 
+*assemble_models()*.
+- Changing parameter name from 'py_path_to_model' to 'py_path' in function 
+*assemble_models()*.
+- Removed function *is_model()*.
+- Removed function *reload_module()*.
+- Removed function *is_module()*.
+- Updated typing hints.
+- Refactoring the code.
+- Updated README.md.
+- Bug fixing in sqlite.py - relationship between tables.
+- In models, the name of the method '__post_init__' changed to 'validate'.
 
-## [v0.4.0]  - 2023-03-17
+## [v0.4.0]  - 2024-03-17
 
 Main Update! Not compatible with previous versions.
 
