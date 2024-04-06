@@ -91,7 +91,7 @@ Arguments:
 
 ### 💻 As Script 
 
-You can find an example script in the directory *help_files/*.
+You can find an example script in the directory *help_file/*.
 
 #### 🪄 Functions
 
