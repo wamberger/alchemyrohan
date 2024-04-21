@@ -94,9 +94,8 @@ def main() -> None:
         default='py_path')
     parser.add_argument(
         '-m', '--models',
-        type=str,
         help='Names of the database tables',
-        nargs='+',
+        action='append',
         default=[],
         required=True)
 

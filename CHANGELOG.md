@@ -1,6 +1,12 @@
 
 # Change Log
 
+## [v0.5.0] - 2024-04-21
+
+- code refactor.
+- The 'validate' method has been removed from the created models and is no longer available.
+- Updated README.md.
+
 ## [v0.4.1] - 2024-04-06
 
 - Adding an option to execute it in command-line: *arohan*.

@@ -7,12 +7,12 @@ build-backend = "pdm.backend"
 
 [project]
 name = "alchemyrohan"
-version = "0.4.1"
+version = "0.4.2"
 dependencies = [
     "SQLAlchemy>=2.0.29",
     "oracledb>=2.1.1"
 ]
-requires-python = ">=3.12"
+requires-python = ">=3.10"
 authors = [
   { name = "Alan Wamberger", email = "awamberger@proton.me" },
 ]

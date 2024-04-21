@@ -3,7 +3,7 @@
 
 # Alchemyrohan
 
- ![pypi v23.x](https://img.shields.io/badge/pypi-v23.x-yellow) ![Python 3.12](https://img.shields.io/badge/python-3.12-blue) ![SqlAlchemy](https://img.shields.io/badge/SqlAlchemy-2.0-red)
+ ![pypi v22|v23](https://img.shields.io/badge/pypi-v22_|_v23-yellow) ![Python 3.10|3.11|3.12](https://img.shields.io/badge/python-3.10_|_3.11_|_3.12-blue) ![SqlAlchemy](https://img.shields.io/badge/SqlAlchemy-2.0-red)
 
 
 Alchemyrohan is a helpful tool for creating **[SqlAlchemy](https://www.sqlalchemy.org/)** models 
@@ -110,7 +110,7 @@ SqlAlchemy database model and is accepting the following arguments:
 import os
 
 from sqlalchemy.exc import SQLAlchemyError
-from alchemyrohan import assemble_models
+import alchemyrohan as ar
 
 
 def main():
@@ -128,7 +128,7 @@ def main():
     table_names = ['parent', 'child'] # all names will be capitilized
 
     try:
-        assemble_models(conn_str, table_names, path,py_path)
+        ar.assemble_models(conn_str, table_names, path,py_path)
     except SQLAlchemyError as e:
         raise SQLAlchemyError(e) from e
 
@@ -145,7 +145,9 @@ if __name__ == '__main__':
 
 ~~~python
 
-from alchemyrohan import get_model
+import alchemyrohan as ar
+
+model = ar.get_model('child', 'py.path.to.model')
 
 ~~~
 
@@ -155,10 +157,10 @@ Created SqlAlchemy models have some additional features:
 
 - Default values.
 - Parent-child relationships.
-- The *validate* method is used for validation.
 - When 'printing', the string will contain the model/object name and attribute names with their values.
 
-All models are named with the same convention as they are in the database, with one difference: they are capitalized according to Python class naming conventions.
+All models are named with the same convention as they are in the database, 
+with one difference: they are capitalized according to Python class naming conventions.
 
 
 **Example of one created model**:
@@ -185,41 +187,13 @@ class Child(Base):
 
 
     parent_Parent = relationship("Parent", back_populates="children_Child", lazy="joined")
-
-    def validate(self):
-
-        if self.id and not isinstance(self.id, int):
-            try:
-                self.id = int(self.id)
-            except:
-                raise SyntaxError(f'< {self.id} > is not integer')
-        
-        if self.parent_id and not isinstance(self.parent_id, int):
-            try:
-                self.parent_id = int(self.parent_id)
-            except:
-                raise SyntaxError(f'< {self.parent_id} > is not integer')
-        
-        if self.name and not isinstance(self.name, str):
-            try:
-                self.name = str(self.name)
-            except:
-                raise SyntaxError(f'< {self.name} > is not string')
-        
-        if self.grade and not isinstance(self.grade, int):
-            try:
-                self.grade = int(self.grade)
-            except:
-                raise SyntaxError(f'< {self.grade} > is not integer')
-        
     
     def __str__(self):
 
-        return f'User(id={self.id},'\
-			f'parent_id={self.parent_id},'\
-			f'name={self.name},'\
-			f'grade={self.grade})'
-
+        return (f'User(id={self.id},'
+			f'parent_id={self.parent_id},'
+			f'name={self.name},'
+			f'grade={self.grade})')
 
 ~~~ 
 
@@ -246,6 +220,11 @@ This may be necessary in cases when:
 
 
 ## 📋 Release Notes
+
+- ***v0.5.0***:
+  - code refactor.
+  - The 'validate' method has been removed from the created models and is no longer available.
+  - Updated README.md.
 
 - ***v0.4.1*** - Some vital changes! Please look at CHANGELOG.md. In short:
   - New command-line: *arohan*.
