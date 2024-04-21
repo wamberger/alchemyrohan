@@ -13,7 +13,7 @@ __title__ = 'alchemyrohan'
 __summary__ = 'Tool to create database models'
 __url__ = 'https://github.com/wamberger/alchemyrohan'
 
-__version__ = '0.4.0'
+__version__ = '0.5.0'
 
 __author__ = 'Alan Wamberger'
 __email__ = 'awamberger@proton.me'

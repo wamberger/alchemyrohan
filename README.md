@@ -59,34 +59,40 @@ This project is currently designed to work with the following databases:
 
 ### ⌨️ In Command-Line
 
-You can execute the tool by entering the following command along with its arguments:
+You can execute the tool by entering the command along with its arguments:
 
-> arohan -c sqlite:///path/to/database/test.db -y tests.test_models -p /path/to/save/models/ -m table1 table2 table3
+```bash
 
-Arguments:
+usage: arohan [-h] -c CONN_STR [-p PATH] [-y PY_PATH] -m MODELS
 
-        -c, --conn_str:
-            Connection string to connect with the database.
-            Required argument. Accepts a string.
+options:
+  -h, --help            show the help message and exit
+  -c CONN_STR, --conn_str CONN_STR
+                        Connection string to connect with the database - Required argument. 
+                        Accepts a string.
+  -p PATH, --path PATH  Path where to save the models - Optional argument. 
+                        Defaults to the current working directory. Accepts a string.
+  -y PY_PATH, --py_path PY_PATH
+                        Pythonic path to models in the project. Optional argument. 
+                        Defaults to 'py_path'. Accepts a string.
+  -m MODELS, --models MODELS
+                        Names of the database tables. Required argument. Add every table with -m=
 
-        -p, --path:
-            Path where to save the models.
-            Optional argument. Defaults to the current working directory.
-            Accepts a string.
+```
+**Example:**
 
-        -y, --py_path:
-            Pythonic path to models in the project.
-            Optional argument. Defaults to 'py_path'.
-            Accepts a string.
+```bash 
 
-        -m, --models:
-            Names of the database tables.
-            Required argument. Accepts one or more strings.
+arohan -c=sqlite:////path/to/your/database/test.db  -y=py.path.to.models -p=path/to/models/ -m=table1 -m=table2 -m=tables3
+
+```
 
 
 ### 💻 As Script 
 
-You can find an example script in the directory *help_file/*.
+You can find an example script in the directory *[help_file/][1]*.
+
+[1]: https://github.com/wamberger/alchemyrohan/tree/master/help_file
 
 #### 🪄 Functions
 
@@ -113,7 +119,7 @@ from sqlalchemy.exc import SQLAlchemyError
 import alchemyrohan as ar
 
 
-def main():
+def main() -> None:
 
     path = os.path.dirname(__file__)
 
@@ -128,7 +134,7 @@ def main():
     table_names = ['parent', 'child'] # all names will be capitilized
 
     try:
-        ar.assemble_models(conn_str, table_names, path,py_path)
+        ar.assemble_models(conn_str, table_names, path, py_path)
     except SQLAlchemyError as e:
         raise SQLAlchemyError(e) from e
 
@@ -248,15 +254,15 @@ This may be necessary in cases when:
 
 ## 📄 License and Third-Party Licenses
 
-Alchemyrohan is MIT licensed, as stated in the [LICENSE][1] file.
+Alchemyrohan is MIT licensed, as stated in the [LICENSE][2] file.
 
 The following software components are included in this project:
 
 * SqlAlchemy (MIT License)
 * python-oracledb (Apache License 2.0) 
 
-[THIRD PARTY LICENSES][2]
+[THIRD PARTY LICENSES][3]
 
 
-[1]: https://github.com/wamberger/alchemyrohan/blob/master/LICENSE
-[2]: https://github.com/wamberger/alchemyrohan/blob/master/THIRD_PARTY_LICENSES
+[2]: https://github.com/wamberger/alchemyrohan/blob/master/LICENSE
+[3]: https://github.com/wamberger/alchemyrohan/blob/master/THIRD_PARTY_LICENSES

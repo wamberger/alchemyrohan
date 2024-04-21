@@ -56,45 +56,50 @@ def main() -> None:
     Read arguments from the command line
     and call the function 'assemble_models()'.
 
-    Description of Arguments:
-        -c, --conn_str:
-            Connection string to connect with the database.
-            Required argument. Accepts a string.
+    usage: arohan [-h] -c CONN_STR [-p PATH] [-y PY_PATH] -m MODELS
 
-        -p, --path:
-            Path where to save the models.
-            Optional argument. Defaults to the current working directory.
-            Accepts a string.
-
-        -y, --py_path:
-            Pythonic path to models in the project.
-            Optional argument. Defaults to 'py_path'.
-            Accepts a string.
-
-        -m, --models:
-            Names of the database tables.
-            Required argument. Accepts one or more strings.
+    options:
+      -h, --help            show help message and exit
+      -c CONN_STR, --conn_str CONN_STR
+                            Connection string to connect with the
+                            database - Required argument. Accepts a string.
+      -p PATH, --path PATH  Path where to save the models - Optional argument.
+                            Defaults to the current working directory.
+                            Accepts a string.
+      -y PY_PATH, --py_path PY_PATH
+                            Pythonic path to models in the project.
+                            Optional argument. Defaults to 'py_path'.
+                            Accepts a string.
+      -m MODELS, --models MODELS
+                        Names of the database tables.
+                        Required argument. Add every table with -m=
     """
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '-c', '--conn_str',
         type=str,
-        help='Connection string to connect with the database',
+        help='Connection string to connect with the database'
+             ' - Required argument. Accepts a string.',
         required=True)
     parser.add_argument(
         '-p', '--path',
         type=str,
-        help='Path where to save the models',
+        help='Path where to save the models - '
+             'Optional argument. Defaults to the current '
+             'working directory. Accepts a string.',
         default=os.getcwd())
     parser.add_argument(
         '-y', '--py_path',
         type=str,
-        help='Pythonic path to models in the project',
+        help="Pythonic path to models in the project. "
+             "Optional argument. Defaults to 'py_path'. "
+             "Accepts a string.",
         default='py_path')
     parser.add_argument(
         '-m', '--models',
-        help='Names of the database tables',
+        help='Names of the database tables. '
+             'Required argument. Add every table with -m=',
         action='append',
         default=[],
         required=True)

@@ -6,7 +6,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from alchemyrohan import assemble_models
 
 
-def main():
+def main() -> None:
 
     path = os.path.dirname(__file__)
 
@@ -21,7 +21,7 @@ def main():
     table_names = ['parent', 'child'] # all names will be capitilized
 
     try:
-        assemble_models(conn_str, table_names, path,py_path)
+        assemble_models(conn_str, table_names, path, py_path)
     except SQLAlchemyError as e:
         raise SQLAlchemyError(e) from e
 
