@@ -35,7 +35,7 @@ from alchemyrohan.utils import str_print
 dialect_imports = []
 
 
-def _get_default(typ: str) -> Any:
+def get_default(typ: str) -> Any:
     if typ == 'BINARY_DOUBLE':
         return 0.0
     if typ == 'BINARY_FLOAT':
@@ -73,14 +73,14 @@ def _get_default(typ: str) -> Any:
     if typ == 'ROWID':
         return "' '"
     if typ == 'TIMESTAMP':
-        return datetime.utcnow()
+        return datetime.now()
     if typ == 'VARCHAR':
         return "' '"
     if typ == 'VARCHAR2':
         return "' '"
 
 
-def _get_type_name(typ: Any) -> str:
+def get_type_name(typ: Any) -> str:
     if isinstance(typ, BINARY_DOUBLE):
         return 'BINARY_DOUBLE'
     if isinstance(typ, BINARY_FLOAT):
@@ -125,7 +125,7 @@ def _get_type_name(typ: Any) -> str:
         return 'VARCHAR2'
 
 
-def _get_type_prop(typ: Any) -> str:
+def get_type_prop(typ: Any) -> str:
     if isinstance(typ, BINARY_DOUBLE):
         return 'BINARY_DOUBLE'
     if isinstance(typ, BINARY_FLOAT):
@@ -168,102 +168,18 @@ def _get_type_prop(typ: Any) -> str:
         return f'VARCHAR({typ.length})'
     if isinstance(typ, VARCHAR2):
         return f'VARCHAR2({typ.length})'
-    
-
-def _get_validation(typ: str, col: str) -> str:
-
-    tmp: str = ''
-
-    if typ == 'BINARY_DOUBLE'\
-    or typ == 'BINARY_FLOAT'\
-    or typ == 'DOUBLE_PRECISION'\
-    or typ == 'FLOAT'\
-    or typ == 'REAL':
-        tmp = f"""
-        if self.{col} and not isinstance(self.{col}, float):
-            try:
-                self.{col} = float(self.{col})
-            except:
-                raise SyntaxError(f'< {{self.{col}}} > is not float')
-        """
-    
-    elif typ == 'NUMBER':
-        tmp = f"""
-        if self.{col} and not isinstance(self.{col}, int):
-            try:
-                self.{col} = int(self.{col})
-            except:
-                raise SyntaxError(f'< {{self.{col}}} > is not integer')
-        """
-    
-    elif typ == 'BLOB' or typ == 'RAW':
-        tmp = f"""
-        if self.{col} and not isinstance(self.{col}, bytes):
-            try:
-                self.{col} = int(self.{col})
-            except:
-                raise SyntaxError(f'< {{self.{col}}} > is not bytes type')
-        """
-    
-    elif typ == 'DATE' or typ == 'TIMESTAMP':
-        tmp = f"""
-        if self.{col} and not isinstance(self.{col}, datetime):
-            try:
-                self.{col} = int(self.{col})
-            except:
-                raise SyntaxError(f'< {{self.{col}}} > is not datetime type')
-        """
-    
-    elif typ == 'INTERVAL':
-        tmp = f"""
-        if self.{col} and not isinstance(self.{col}, timedelta):
-            try:
-                self.{col} = int(self.{col})
-            except:
-                raise SyntaxError(f'< {{self.{col}}} > is not timedelta type')
-        """
-
-    elif typ == 'CHAR'\
-    or typ == 'CLOB'\
-    or typ == 'LONG'\
-    or typ == 'NCHAR'\
-    or typ == 'NCLOB'\
-    or typ == 'NVARCHAR'\
-    or typ == 'NVARCHAR2'\
-    or typ == 'ROWID'\
-    or typ == 'VARCHAR'\
-    or typ == 'VARCHAR2':
-        tmp = f"""
-        if self.{col} and not isinstance(self.{col}, str):
-            try:
-                self.{col} = str(self.{col})
-            except:
-                raise SyntaxError(f'< {{self.{col}}} > is not string')
-        """
-
-    return tmp
 
 
-def _validations(code_holder: dict, table_meta_data: MetaDataHolder) -> None:
-
-    col = []
-    for c in table_meta_data.columns:
-        col.append(
-            _get_validation(_get_type_name(c['type']), c['name']))
-
-    code_holder.update({'validations': col})
-
-
-def _columns(code_holder: dict, table_meta_data: MetaDataHolder) -> None:
+def columns(code_holder: dict, table_meta_data: MetaDataHolder) -> None:
     
     col = []
     for c in table_meta_data.columns:
         
         tmp = f"{c['name']} = Column("
-        tmp = ''.join([tmp, _get_type_prop(c['type'])])
+        tmp = ''.join([tmp, get_type_prop(c['type'])])
 
         imp = f"from sqlalchemy.dialects.oracle import"\
-            f" {_get_type_name(c['type'])}"
+            f" {get_type_name(c['type'])}"
         if imp not in dialect_imports:
             dialect_imports.append(imp)
 
@@ -283,9 +199,7 @@ def _columns(code_holder: dict, table_meta_data: MetaDataHolder) -> None:
                     if fk == c['name']:
                         ref_table = f['referred_table']
                         tmp = ', '.join(
-                            [tmp, 
-                            f"ForeignKey('{ref_table}.{fk}')"]
-                            )
+                            [tmp, f"ForeignKey('{ref_table}.{fk}')"])
                         imp = 'from sqlalchemy import ForeignKey'
                         if imp not in dialect_imports:
                             dialect_imports.append(imp)
@@ -302,7 +216,7 @@ def _columns(code_holder: dict, table_meta_data: MetaDataHolder) -> None:
                     tmp = ', '.join([
                         tmp, 
                         'nullable=False', 
-                        f"default={_get_default(_get_type_name(c['type']))}"
+                        f"default={get_default(get_type_name(c['type']))}"
                         ]
                         )         
 
@@ -322,20 +236,18 @@ def _columns(code_holder: dict, table_meta_data: MetaDataHolder) -> None:
     code_holder.update({'columns': col})
 
 
-def _relations(code_holder: dict, table_meta_data: MetaDataHolder) -> None:
+def relations(code_holder: dict, table_meta_data: MetaDataHolder) -> None:
 
     rel = []
     for f in table_meta_data.foreign_keys:
         referred_table = f['referred_table']
-
-        tmp = f'parent_{referred_table.capitalize()}'\
-            f' = relationship("{referred_table.capitalize()}",'\
-            f' back_populates="children_{table_meta_data.name.capitalize()}",'\
-            ' lazy="joined")'
-        
+        tmp = (f'parent_{referred_table.capitalize()}'
+               f' = relationship("{referred_table.capitalize()}", '
+               f'back_populates='
+               f'"children_{table_meta_data.name.capitalize()}", '
+               f'lazy="joined")')
         tmp = f"""
     {tmp}""" 
-        
         rel.append(tmp)
 
     for k, v in table_meta_data.multi_foreign_keys.items():
@@ -344,24 +256,20 @@ def _relations(code_holder: dict, table_meta_data: MetaDataHolder) -> None:
                 if r:
                     for rt in r:
                         if rt['referred_table'] == table_meta_data.name:
-                            tmp = f'children_{child_table[1].capitalize()}'\
-                            f' = relationship("{child_table[1].capitalize()}",'\
-                            f' back_populates="parent_'\
-                            f'{table_meta_data.name.capitalize()}",'\
-                            ' lazy="joined")'
-
+                            tmp = (f'children_{child_table[1].capitalize()}'
+                                   f' = relationship('
+                                   f'"{child_table[1].capitalize()}", '
+                                   f'back_populates='
+                                   f'"parent_{table_meta_data.name.capitalize()}", '
+                                   f'lazy="joined")')
                             tmp = f"""
-    {tmp}""" 
-
+    {tmp}"""
                             rel.append(tmp)
-
             break
-                    
     if rel:
         imp = 'from sqlalchemy.orm import relationship'
         if imp not in dialect_imports:
             dialect_imports.append(imp)
-
     code_holder.update(
         {'imports': code_holder['imports'] + dialect_imports}
         )
@@ -371,7 +279,6 @@ def _relations(code_holder: dict, table_meta_data: MetaDataHolder) -> None:
 def read_oracle_and_build_code(
         code_holder: dict, table_meta_data: MetaDataHolder) -> None:
 
-    _columns(code_holder, table_meta_data)
-    _relations(code_holder, table_meta_data)
-    _validations(code_holder, table_meta_data)
+    columns(code_holder, table_meta_data)
+    relations(code_holder, table_meta_data)
     str_print(code_holder, table_meta_data)

@@ -24,11 +24,28 @@ class TestModels(unittest.TestCase):
             result = get_model(table_name, py_path)
             self.assertEqual(result, expected_result)
 
-    def test_validation(self):
+    def test_models_str(self):
 
-        parent = Parent(id=1, name='alice', age=23)
+        py_path = 'tests.test_models'
 
-        parent.validate()
+        expect = 'User(id=None,name=None,age=None,height=None,is_active=None)'
+        parent = get_model('parent', py_path)
+        p = parent()
+        self.assertEqual(str(p), expect)
+
+        expect = 'User(id=None,parent_id=None,name=None,grade=None)'
+        child = get_model('child', py_path)
+        p = child()
+        self.assertEqual(str(p), expect)
+
+    def test_models_instance(self):
+
+        py_path = 'tests.test_models'
+
+        expect = 'User(id=None,name=Alice,age=24,height=170.3,is_active=True)'
+        parent = get_model('parent', py_path)
+        p = parent(name='Alice', age=24, height=170.3, is_active=True)
+        self.assertEqual(str(p), expect)
 
 
 if __name__ == '__main__':

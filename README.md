@@ -83,11 +83,6 @@ Arguments:
             Names of the database tables.
             Required argument. Accepts one or more strings.
 
-        --verbose:
-            Enables verbose mode.
-            Optional argument. Activates verbose mode if provided.
-            Does not require any additional argument value.
-
 
 ### 💻 As Script 
 

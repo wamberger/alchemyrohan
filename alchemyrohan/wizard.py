@@ -57,7 +57,6 @@ def generate_code(
 
     elif table_meta_data.rdbms == 'mysql':  
         ...
-        # TODO
 
     elif table_meta_data.rdbms == 'oracle':  
         
@@ -91,9 +90,6 @@ def construct_model(code_holder: dict) -> str:
 {''.join(_add(code_holder['columns']))}
 
 {''.join(_add(code_holder['relations']))}
-
-    def validate(self):
-{''.join(code_holder['validations'])}
     
     def __str__(self):
 {code_holder['str_print']}

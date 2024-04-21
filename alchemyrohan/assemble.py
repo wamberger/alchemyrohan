@@ -3,7 +3,6 @@
 __all__ = ['assemble_models']
 
 import os
-import sys
 import argparse
 
 from typing import Iterable
@@ -75,11 +74,6 @@ def main() -> None:
         -m, --models:
             Names of the database tables.
             Required argument. Accepts one or more strings.
-
-        --verbose:
-            Enables verbose mode.
-            Optional argument. Activates verbose mode if provided.
-            Does not require any additional argument value.
     """
 
     parser = argparse.ArgumentParser()
@@ -105,10 +99,6 @@ def main() -> None:
         nargs='+',
         default=[],
         required=True)
-    parser.add_argument(
-        '--verbose',
-        help='Verbose mode',
-        action='store_true')
 
     args = parser.parse_args()
 
